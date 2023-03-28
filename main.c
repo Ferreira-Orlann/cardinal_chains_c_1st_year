@@ -16,9 +16,9 @@ Color chainColors[] = {
     RAYWHITE, RED, GREEN, BLUE
 };
 Cell* board = NULL;
-Cell* chains;
 int boardSize = 0;
-Cell** lastsOfChains[10];
+Cell** lastsOfChains;
+int nbOfChains = 0;
 int level;
 int lastChain = 0;
 
@@ -40,10 +40,6 @@ void ChangeGameState(int state) {
 
 GameState GetCurrentGameState() {
     return currentGameState;
-}
-
-Cell* GetChains() {
-    return chains;
 }
 
 int GetLevel() {
@@ -95,6 +91,7 @@ bool InitLevel(int name) {
     int startY = center.y-((50*collumSize)/2);
     int position = 0;
     int offset = 0;
+    int localNbOfChains = 0;
     for (int i = 0; i < collumSize; i++) {
         for (int b = 0; b < collumSize; b++) {
             char charVal[2];
@@ -103,6 +100,9 @@ bool InitLevel(int name) {
             position++;
             if (val < 0) {
                 continue;
+            }
+            if (val == 0) {
+                localNbOfChains++;
             }
             Cell cell = {
                 .rect = {
@@ -120,11 +120,13 @@ bool InitLevel(int name) {
             offset++;
         }
     }
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < nbOfChains; i++) {
         *(lastsOfChains+i) = NULL;
     }
     level = name;
     lastChain = 0;
+    nbOfChains = localNbOfChains;
+    lastsOfChains = malloc(sizeof(Cell*)*nbOfChains);
     return true;
 }
 
@@ -147,7 +149,7 @@ int main() {
 
     while (!WindowShouldClose()) {
         UpdateGame(currentGameState);
-        UpdateDrawFrame(currentGameState);
+        DrawFrame(currentGameState);
     }
 
     CloseWindow();
