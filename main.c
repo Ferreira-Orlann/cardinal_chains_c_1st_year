@@ -13,7 +13,7 @@ int screenWidth = 1080;
 int screenHeight = 720;
 GameState currentGameState = STATE_START;
 Color chainColors[] = {
-    RAYWHITE, RED, GREEN, BLUE
+    RAYWHITE, RED, GREEN, BLUE, YELLOW,ORANGE, GRAY
 };
 Cell* board = NULL;
 Cell* chains;

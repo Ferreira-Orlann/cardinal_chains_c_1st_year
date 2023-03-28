@@ -9,12 +9,12 @@ Cell* lastCollisionedCell = NULL;
 void UpdateGame(GameState state) {
     switch (state) {
         case STATE_START:
-            Vector2 textSize =  MeasureTextEx(GetFontDefault(), "Start", 20, 1);
+            Vector2 textSize =  MeasureTextEx(GetFontDefault(), "Start", 60, 1);
             Rectangle textRect = {
                 .width = textSize.x,
                 .height = textSize.y,
-                .x = (GetScreenWidth()/2)-21,
-                .y = (GetRenderHeight()/2)-10
+                .x = (GetScreenWidth()/2)-60,
+                .y = (GetRenderHeight()/2)-60
             };
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), textRect) == true) {
                 ChangeGameState(STATE_BOARD);

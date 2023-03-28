@@ -10,14 +10,14 @@ void UpdateDrawFrame(GameState state) {
 		ClearBackground(RAYWHITE);
 		switch (state) {
 			case STATE_START:
-				DrawText("Start", (GetScreenWidth()/2)-21, (GetRenderHeight()/2)-10, 20, RED);
+                DrawText("Start", (GetScreenWidth()/2)-60, (GetRenderHeight()/2)-60, 60, RED);
 				break;
 			case STATE_BOARD:
 				DrawBoard();
 				break;
 			case STATE_WIN:
 				DrawBoard();
-				DrawText("YOU WON!", (GetScreenWidth()/2), (GetRenderHeight()/2), 50, PURPLE);
+				DrawText("YOU WON ALL THE LEVELS !!", (GetScreenWidth()/2)-400, (GetRenderHeight()/2)-250, 60, PURPLE);
 				break;
 			default:
 				break;
