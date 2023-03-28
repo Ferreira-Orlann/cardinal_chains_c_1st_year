@@ -9,8 +9,6 @@
 #include <math.h>
 #include "jsmn.h"
 
-int screenWidth = 1080;
-int screenHeight = 720;
 GameState currentGameState = STATE_START;
 Color chainColors[] = {
     RAYWHITE, RED, GREEN, BLUE, YELLOW,ORANGE, GRAY
@@ -139,7 +137,7 @@ void NextLastChainInt() {
 }
 
 int main() {
-    InitWindow(screenWidth, screenHeight, "Cardinal Chains");
+    InitWindow(SCRREN_WIDTH, SCREEN_HEIGHT, "Cardinal Chains");
     Image icon = LoadImage("./assets/icon.png");
     SetWindowIcon(icon);
     UnloadImage(icon);

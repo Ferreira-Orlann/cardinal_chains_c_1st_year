@@ -18,5 +18,11 @@
         int chain;
     } Cell;
     
+    #ifndef SCRREN_WIDTH
+        #define SCRREN_WIDTH 1080
+    #endif
+    #ifndef SCREEN_HEIGHT
+        #define SCREEN_HEIGHT 720
+    #endif
 
 #endif

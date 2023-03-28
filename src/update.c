@@ -3,18 +3,21 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "utils.h"
 
 Cell* lastCollisionedCell = NULL;
 
 void UpdateGame(GameState state) {
     switch (state) {
         case STATE_START:
-            Vector2 textSize =  MeasureTextEx(GetFontDefault(), "Start", 60, 1);
+            char* text = "Start";
+            Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60);
+            Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 60, 1);
             Rectangle textRect = {
                 .width = textSize.x,
                 .height = textSize.y,
-                .x = (GetScreenWidth()/2)-60,
-                .y = (GetRenderHeight()/2)-60
+                .x = textStartPos.x,
+                .y = textStartPos.y
             };
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), textRect) == true) {
                 ChangeGameState(STATE_BOARD);

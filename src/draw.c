@@ -2,17 +2,19 @@
 #include <stdio.h>
 #include "gameconsts.h"
 #include "main.h"
+#include "utils.h"
 
 void DrawLevel();
 void DrawBoard();
 void DrawCell(Cell*);
+void DrawCenteredText(char*, int, int, int, Color);
 
 void DrawFrame(GameState state) {
 	BeginDrawing();
 		ClearBackground(RAYWHITE);
 		switch (state) {
 			case STATE_START:
-                DrawText("Start", (GetScreenWidth()/2)-60, (GetRenderHeight()/2)-60, 60, RED);
+                DrawCenteredText("Start",SCRREN_WIDTH/2, SCREEN_HEIGHT/2, 60, RED);
 				break;
 			case STATE_BOARD:
                 DrawLevel();
@@ -21,7 +23,7 @@ void DrawFrame(GameState state) {
 			case STATE_WIN:
                 DrawLevel();
 				DrawBoard();
-				DrawText("YOU WON ALL THE LEVELS !!", (GetScreenWidth()/2)-400, (GetRenderHeight()/2)-250, 60, PURPLE);
+                DrawCenteredText("YOU WON ALL THE LEVELS !!",SCRREN_WIDTH/2, SCREEN_HEIGHT/2, 60, PURPLE);
 				break;
 			default:
 				break;
@@ -30,11 +32,19 @@ void DrawFrame(GameState state) {
 	EndDrawing();
 }
 
+void DrawCenteredText(char* text, int x, int y, int fontSize, Color color) {
+    Vector2 pos = {
+        .x = x,
+        .y = y
+    };
+    pos = CenterTextVec(text, pos, fontSize);
+    DrawText(text, pos.x, pos.y, fontSize, color);
+}
+
 void DrawLevel() {
     char text[12];
     sprintf(text, "Niveau %d", GetLevel());
-    Vector2 textSize =  MeasureTextEx(GetFontDefault(), text, 30, 1);
-    DrawText(text, (GetScreenWidth()/2)-(textSize.x/2), 20, 30, BLACK);
+    DrawCenteredText(text, SCRREN_WIDTH/2, 20, 30, BLACK);
 }
 
 void DrawBoard() {
