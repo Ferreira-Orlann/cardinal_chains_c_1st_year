@@ -16,13 +16,23 @@
         int x;
         int y;
         int chain;
+        unsigned char type;
     } Cell;
-    
+
+    typedef enum {
+        CELLTYPE_NONE = (1 << 1),
+        CELLTYPE_RIGHT = (1 << 2),
+        CELLTYPE_LEFT = (1 << 3),
+        CELLTYPE_TOP = (1 << 4),
+        CELLTYPE_BOTTOM = (1 << 5),
+    } CellType;
+
     #ifndef SCRREN_WIDTH
         #define SCRREN_WIDTH 1080
     #endif
     #ifndef SCREEN_HEIGHT
         #define SCREEN_HEIGHT 720
     #endif
+
 
 #endif

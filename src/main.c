@@ -99,9 +99,6 @@ bool InitLevel(int name) {
             if (val < 0) {
                 continue;
             }
-            if (val == 0) {
-                localNbOfChains++;
-            }
             Cell cell = {
                 .rect = {
                     .height = 50,
@@ -112,8 +109,12 @@ bool InitLevel(int name) {
                 .value = val,
                 .x = b,
                 .y = i,
-                .chain = 0
+                .chain = 0,
+                .type = CELLTYPE_NONE
             };
+            if (val == 0) {
+                localNbOfChains++;
+            }
             board[offset] = cell;
             offset++;
         }

@@ -73,9 +73,10 @@ void UpdateGame(GameState state) {
                 collosionedCell->value >= lastCollisionedCell->value)
             {
                 Cell** lastOfChain = GetLastsOfChains()+(lastCollisionedCell->chain-1);
-                if (((abs((*lastOfChain)->x - collosionedCell->x) == 1) != (abs((*lastOfChain)->y - collosionedCell->y) == 1))) {
+                if (((abs((*lastOfChain)->x - collosionedCell->x) >= 1) != (abs((*lastOfChain)->y - collosionedCell->y) >= 1))) {
                     collosionedCell->chain = lastCollisionedCell->chain;
                     *lastOfChain = collosionedCell;
+                    printf("%d,%d\n", collosionedCell->x, collosionedCell->y);
                 }
             }
             if (collosionedCell != lastCollisionedCell) {

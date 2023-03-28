@@ -7,7 +7,7 @@
 void DrawLevel();
 void DrawBoard();
 void DrawCell(Cell*);
-void DrawCenteredText(char*, int, int, int, Color);
+void DrawCenteredText(const char*, int, int, int, Color);
 
 void DrawFrame(GameState state) {
 	BeginDrawing();
@@ -32,7 +32,7 @@ void DrawFrame(GameState state) {
 	EndDrawing();
 }
 
-void DrawCenteredText(char* text, int x, int y, int fontSize, Color color) {
+void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color) {
     Vector2 pos = {
         .x = x,
         .y = y
@@ -60,15 +60,36 @@ void DrawCell(Cell* cell) {
         Rectangle rect = cell->rect;
         Color color = *GetChainColor(cell->chain);
         DrawRectangleRec(rect, color);
-        DrawRectangleLinesEx(rect, 2.0f, BLACK);
+        int lineThick = 2.0f;
+        if ((lineThick > rect.width) || (lineThick > rect.height)) {
+            if (rect.width > rect.height) lineThick = rect.height/2;
+            else if (rect.width < rect.height) lineThick = rect.width/2;
+        }
+        if (!(cell->type & CELLTYPE_TOP)) {
+            Rectangle top = { rect.x, rect.y, rect.width, 2.0f };
+            DrawRectangleRec(top, BLACK);
+
+        }
+        if (!(cell->type & CELLTYPE_BOTTOM)) {
+            Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width, lineThick };
+            DrawRectangleRec(bottom, BLACK);
+
+        }
+        if (!(cell->type & CELLTYPE_RIGHT)) {
+            Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f };
+            DrawRectangleRec(right, BLACK);
+
+        }
+        if (!(cell->type & CELLTYPE_LEFT)) {
+            Rectangle left = { rect.x, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f };
+            DrawRectangleRec(left, BLACK);
+        }
         if (cell->value == 0) {
-            char* text = "X";   
-            Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 20, 1);
-            DrawText(text, (rect.x + (rect.width/2)) - (textSize.x/2), (rect.y + (rect.height/2)) - (textSize.y/2), 20, BLACK);
+            const char* text = "X";   
+            DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 20, BLACK);
         } else {
             const char* text = TextFormat("%d", cell->value);
-            Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 20, 1);
-            DrawText(text, (rect.x + (rect.width/2)) - (textSize.x/2), (rect.y + (rect.height/2)) - (textSize.y/2), 20, BLACK);
-        }
+            DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 20, BLACK);
+        }    
     }
 }
