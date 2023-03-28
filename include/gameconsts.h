@@ -33,6 +33,4 @@
     #ifndef SCREEN_HEIGHT
         #define SCREEN_HEIGHT 720
     #endif
-
-
 #endif

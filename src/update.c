@@ -76,7 +76,19 @@ void UpdateGame(GameState state) {
                 if (((abs((*lastOfChain)->x - collosionedCell->x) >= 1) != (abs((*lastOfChain)->y - collosionedCell->y) >= 1))) {
                     collosionedCell->chain = lastCollisionedCell->chain;
                     *lastOfChain = collosionedCell;
-                    printf("%d,%d\n", collosionedCell->x, collosionedCell->y);
+                    if (collosionedCell->y > lastCollisionedCell->y) {
+                        collosionedCell->type = collosionedCell->type | CELLTYPE_TOP;
+                        lastCollisionedCell->type = lastCollisionedCell->type | CELLTYPE_BOTTOM;
+                    } else if (collosionedCell->y < lastCollisionedCell->y) {
+                        collosionedCell->type = collosionedCell->type | CELLTYPE_BOTTOM;
+                        lastCollisionedCell->type = lastCollisionedCell->type | CELLTYPE_TOP;
+                    } else if (collosionedCell->x > lastCollisionedCell->x) {
+                        collosionedCell->type = collosionedCell->type | CELLTYPE_LEFT;
+                        lastCollisionedCell->type = lastCollisionedCell->type | CELLTYPE_RIGHT;
+                    } else if (collosionedCell->x < lastCollisionedCell->x) {
+                        collosionedCell->type = collosionedCell->type | CELLTYPE_RIGHT;
+                        lastCollisionedCell->type = lastCollisionedCell->type | CELLTYPE_LEFT;
+                    }
                 }
             }
             if (collosionedCell != lastCollisionedCell) {

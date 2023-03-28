@@ -68,20 +68,17 @@ void DrawCell(Cell* cell) {
         if (!(cell->type & CELLTYPE_TOP)) {
             Rectangle top = { rect.x, rect.y, rect.width, 2.0f };
             DrawRectangleRec(top, BLACK);
-
         }
         if (!(cell->type & CELLTYPE_BOTTOM)) {
             Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width, lineThick };
             DrawRectangleRec(bottom, BLACK);
-
         }
         if (!(cell->type & CELLTYPE_RIGHT)) {
-            Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f };
+            Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
             DrawRectangleRec(right, BLACK);
-
         }
         if (!(cell->type & CELLTYPE_LEFT)) {
-            Rectangle left = { rect.x, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f };
+            Rectangle left = { rect.x, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
             DrawRectangleRec(left, BLACK);
         }
         if (cell->value == 0) {
