@@ -143,7 +143,7 @@ int main() {
     UnloadImage(icon);
     SetTargetFPS(60);
 
-    InitLevel(1);
+    InitLevel(12);
 
     while (!WindowShouldClose()) {
         UpdateGame(currentGameState);
