@@ -27,7 +27,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 # Our Project
 
 include_directories(include)
-add_executable(${PROJECT_NAME} main.c draw.c update.c)
+add_executable(${PROJECT_NAME} src/main.c src/draw.c src/update.c)
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
