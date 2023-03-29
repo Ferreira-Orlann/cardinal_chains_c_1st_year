@@ -14,8 +14,11 @@ void DrawFrame(GameState state) {
 		ClearBackground(RAYWHITE);
 		switch (state) {
 			case STATE_START:
+                DrawCenteredText("WELCOME TO ",SCRREN_WIDTH/2, SCREEN_HEIGHT/6, 60, ORANGE);
+                DrawCenteredText("CARDINAL CHAINS GAME",SCRREN_WIDTH/2.1, SCREEN_HEIGHT/3.8, 60, ORANGE);
                 DrawCenteredText("Start",SCRREN_WIDTH/2, SCREEN_HEIGHT/2, 60, RED);
-				break;
+                DrawCenteredText("Game created by Orlann Ferreira and Tommy Brisset",SCRREN_WIDTH/3.8, SCREEN_HEIGHT/1.08, 20, BLACK);
+                break;
 			case STATE_BOARD:
                 DrawLevel();
 				DrawBoard();
@@ -23,8 +26,9 @@ void DrawFrame(GameState state) {
 			case STATE_WIN:
                 DrawLevel();
 				DrawBoard();
-                DrawCenteredText("YOU WON ALL THE LEVELS !!",SCRREN_WIDTH/2, SCREEN_HEIGHT/2, 60, PURPLE);
-				break;
+                DrawCenteredText("YOU WON ALL THE LEVELS !!",SCRREN_WIDTH/2.3, SCREEN_HEIGHT/4.5, 60, PURPLE);
+                DrawCenteredText("NEXT LEVELS COMING SOON ",SCRREN_WIDTH/2.1, SCREEN_HEIGHT/1.1, 40, BLACK);
+                break;
 			default:
 				break;
 		}
