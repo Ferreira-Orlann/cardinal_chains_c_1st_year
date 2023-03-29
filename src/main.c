@@ -152,5 +152,7 @@ int main() {
     }
 
     CloseWindow();
+    free(lastsOfChains);
+    free(board);
     return 0;
 }

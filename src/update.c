@@ -47,6 +47,7 @@ void UpdateGame(GameState state) {
                                     } else {
                                         *(GetLastsOfChains()+(cell->chain-1)) = cell;
                                     }
+                                    cell2->type = CELLTYPE_NONE;
                                 }
                             }
                             lastCollisionedCell = NULL;
@@ -67,14 +68,20 @@ void UpdateGame(GameState state) {
                     collosionedCell->chain = GetLastChainInt();
                 };
             }
+            Cell** lastOfChain = GetLastsOfChains()+(lastCollisionedCell->chain-1);
             if (collosionedCell->chain == 0 && 
                 lastCollisionedCell->chain != 0 && 
                 collosionedCell->chain != lastCollisionedCell->chain && 
-                collosionedCell->value >= lastCollisionedCell->value)
+                collosionedCell->value >= lastCollisionedCell->value &&
+                lastCollisionedCell == *lastOfChain)
             {
-                Cell** lastOfChain = GetLastsOfChains()+(lastCollisionedCell->chain-1);
-                if (((abs((*lastOfChain)->x - collosionedCell->x) >= 1) != (abs((*lastOfChain)->y - collosionedCell->y) >= 1))) {
+                printf("Conditions: %d - %d\n", abs((*lastOfChain)->x - collosionedCell->x) == 1, abs((*lastOfChain)->y - collosionedCell->y) == 1);
+                int abs1 = abs((*lastOfChain)->x - collosionedCell->x);
+                int abs2 = abs((*lastOfChain)->y - collosionedCell->y);
+                // if (((abs((*lastOfChain)->x - collosionedCell->x) == 1) != (abs((*lastOfChain)->y - collosionedCell->y) == 1))) {
+                if (((abs1 == 1) != (abs2 == 1)) && ((abs1 < 2) && (abs2 < 2))) {
                     collosionedCell->chain = lastCollisionedCell->chain;
+                    printf("lastOfChain (x,y): %d - %d; collosionedCell(x,y) %d - %d; Conditions: %d - %d\n", (*lastOfChain)->x, (*lastOfChain)->y, collosionedCell->x, collosionedCell->y, abs((*lastOfChain)->x - collosionedCell->x) == 1, abs((*lastOfChain)->y - collosionedCell->y) == 1);
                     *lastOfChain = collosionedCell;
                     if (collosionedCell->y > lastCollisionedCell->y) {
                         collosionedCell->type = collosionedCell->type | CELLTYPE_TOP;

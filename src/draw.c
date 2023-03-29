@@ -28,7 +28,7 @@ void DrawFrame(GameState state) {
 			default:
 				break;
 		}
-		DrawText(TextFormat("%d FPS", GetFPS()), 10, 10, 20, RED);
+        DrawFPS(10,10);
 	EndDrawing();
 }
 
@@ -70,10 +70,12 @@ void DrawCell(Cell* cell) {
             DrawRectangleRec(top, BLACK);
         }
         if (!(cell->type & CELLTYPE_BOTTOM)) {
-            Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width, lineThick };
+            // Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width, lineThick };
+            Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width + 1, lineThick };
             DrawRectangleRec(bottom, BLACK);
         }
         if (!(cell->type & CELLTYPE_RIGHT)) {
+            // Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
             Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
             DrawRectangleRec(right, BLACK);
         }
