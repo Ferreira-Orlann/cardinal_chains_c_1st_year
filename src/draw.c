@@ -4,12 +4,12 @@
 #include "main.h"
 #include "utils.h"
 
-void DrawLevel();
-void DrawBoard();
-void DrawCell(Cell*);
-void DrawCenteredText(const char*, int, int, int, Color);
+void DrawLevel(); //Draws the current level of the game.
+void DrawBoard(); // Draws the board with all the cells;
+void DrawCell(Cell*); //Draws each individual cell of the board;
+void DrawCenteredText(const char*, int, int, int, Color); //Draws a centered text;
 
-void DrawFrame(GameState state) {
+void DrawFrame(GameState state) { //Draws the main frame for the game;
 	BeginDrawing();
 		ClearBackground(RAYWHITE);
 		switch (state) {

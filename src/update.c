@@ -14,7 +14,7 @@ void SleepUpdate();
 
 float sleepTime = 0;
 
-void UpdateGame(GameState state) {
+void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
     switch (state) {
         case STATE_START:
             char* text = "Start";
@@ -41,7 +41,7 @@ void UpdateGame(GameState state) {
     }
 }
 
-void SleepUpdate() {
+void SleepUpdate() { //Updates the sleep time counter until the next level is initialized.
     sleepTime = sleepTime - GetFrameTime();
     if (sleepTime <= 0.0f) {
         if (InitLevel(GetLevel()+1) == false) {
@@ -52,7 +52,7 @@ void SleepUpdate() {
     }
 }
 
-void BoardUpdate() {
+void BoardUpdate() { //Updates the board state
             Cell* collosionedCell = NULL;
             Cell* board = GetBoard();
             int size = GetBoardSize();
