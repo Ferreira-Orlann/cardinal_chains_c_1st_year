@@ -10,10 +10,11 @@
 Cell* lastCollisionedCell = NULL;
 
 void BoardUpdate();
+void SleepUpdate();
 
 float sleepTime = 0;
 
-void UpdateGame(GameState state) {
+void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
     switch (state) {
         case STATE_START:
             char* text = "Start";
@@ -33,21 +34,25 @@ void UpdateGame(GameState state) {
             BoardUpdate();
             break;
         case STATE_LEVEL_FINISH:
-            sleepTime = sleepTime - GetFrameTime();
-            if (sleepTime <= 0.0f) {
-                if (InitLevel(GetLevel()+1) == false) {
-                    ChangeGameState(STATE_WIN);
-                } else {
-                    ChangeGameState(STATE_BOARD);
-                }
-            }
+            SleepUpdate();
             break;
         default:
             break;
     }
 }
 
-void BoardUpdate() {
+void SleepUpdate() { //Updates the sleep time counter until the next level is initialized.
+    sleepTime = sleepTime - GetFrameTime();
+    if (sleepTime <= 0.0f) {
+        if (InitLevel(GetLevel()+1) == false) {
+            ChangeGameState(STATE_WIN);
+        } else {
+            ChangeGameState(STATE_BOARD);
+        }
+    }
+}
+
+void BoardUpdate() { //Updates the board state
             Cell* collosionedCell = NULL;
             Cell* board = GetBoard();
             int size = GetBoardSize();
