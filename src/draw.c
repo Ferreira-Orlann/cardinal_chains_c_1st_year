@@ -29,6 +29,10 @@ void DrawFrame(GameState state) {
                 DrawCenteredText("YOU WON ALL THE LEVELS !!",SCRREN_WIDTH/2.3, SCREEN_HEIGHT/4.5, 60, PURPLE);
                 DrawCenteredText("NEXT LEVELS COMING SOON ",SCRREN_WIDTH/2.1, SCREEN_HEIGHT/1.1, 40, BLACK);
                 break;
+            case STATE_LEVEL_FINISH:
+                DrawLevel();
+				DrawBoard();
+                DrawCenteredText("LEVEL FINISH ",SCRREN_WIDTH/2, SCREEN_HEIGHT/6, 60, BLACK);
 			default:
 				break;
 		}

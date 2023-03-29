@@ -6,7 +6,13 @@
 #include <stdlib.h>
 #include "utils.h"
 #include <unistd.h>
+
 Cell* lastCollisionedCell = NULL;
+
+void BoardUpdate();
+void SleepUpdate();
+
+float sleepTime = 0;
 
 void UpdateGame(GameState state) {
     switch (state) {
@@ -25,6 +31,28 @@ void UpdateGame(GameState state) {
             }
             break;
         case STATE_BOARD:
+            BoardUpdate();
+            break;
+        case STATE_LEVEL_FINISH:
+            SleepUpdate();
+            break;
+        default:
+            break;
+    }
+}
+
+void SleepUpdate() {
+    sleepTime = sleepTime - GetFrameTime();
+    if (sleepTime <= 0.0f) {
+        if (InitLevel(GetLevel()+1) == false) {
+            ChangeGameState(STATE_WIN);
+        } else {
+            ChangeGameState(STATE_BOARD);
+        }
+    }
+}
+
+void BoardUpdate() {
             Cell* collosionedCell = NULL;
             Cell* board = GetBoard();
             int size = GetBoardSize();
@@ -57,7 +85,7 @@ void UpdateGame(GameState state) {
                 }
             }
             if (collosionedCell == NULL || collosionedCell->value < 0) { 
-                break;
+                return;
             }
             if (lastCollisionedCell == NULL) {
                 lastCollisionedCell = collosionedCell;
@@ -108,18 +136,8 @@ void UpdateGame(GameState state) {
                     break;
                 }
                 if (i == (size-1)) {
-                    DrawCenteredText("LEVEL FINISH ",SCRREN_WIDTH/2, SCREEN_HEIGHT/6, 60, BLACK);
-                    DrawFrame(GetCurrentGameState());
-                    sleep(1.2);
-                    ClearBackground(RAYWHITE);
-
-                    if (InitLevel(GetLevel()+1) == false) {
-                        ChangeGameState(STATE_WIN);
-                    }
+                    ChangeGameState(STATE_LEVEL_FINISH);
+                    sleepTime = 1.2f;
                 }
             }
-            break;
-        default:
-            break;
-    }
 }
