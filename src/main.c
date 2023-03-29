@@ -8,6 +8,7 @@
 #include "update.h"
 #include "main.h"
 #include "jsmn.h"
+#include "raigui.h"
 
 GameState currentGameState = STATE_START;   //Stores the current state of the game.
 Color chainColors[] = { //An array of colors used to represent each chain.

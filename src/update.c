@@ -10,7 +10,6 @@
 Cell* lastCollisionedCell = NULL;
 
 void BoardUpdate();
-void SleepUpdate();
 
 float sleepTime = 0;
 
@@ -34,21 +33,17 @@ void UpdateGame(GameState state) {
             BoardUpdate();
             break;
         case STATE_LEVEL_FINISH:
-            SleepUpdate();
+            sleepTime = sleepTime - GetFrameTime();
+            if (sleepTime <= 0.0f) {
+                if (InitLevel(GetLevel()+1) == false) {
+                    ChangeGameState(STATE_WIN);
+                } else {
+                    ChangeGameState(STATE_BOARD);
+                }
+            }
             break;
         default:
             break;
-    }
-}
-
-void SleepUpdate() {
-    sleepTime = sleepTime - GetFrameTime();
-    if (sleepTime <= 0.0f) {
-        if (InitLevel(GetLevel()+1) == false) {
-            ChangeGameState(STATE_WIN);
-        } else {
-            ChangeGameState(STATE_BOARD);
-        }
     }
 }
 

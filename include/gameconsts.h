@@ -13,10 +13,10 @@
 
     typedef struct {
         Rectangle rect;
-        int value;
-        int x;
-        int y;
-        int chain;
+        unsigned char value;
+        unsigned char x;
+        unsigned char y;
+        unsigned char chain;
         unsigned char type;
     } Cell;
 
