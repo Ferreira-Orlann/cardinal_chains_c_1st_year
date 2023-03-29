@@ -1,54 +1,54 @@
-#include "raylib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include "raylib.h"
 #include "gameconsts.h"
 #include "draw.h"
 #include "update.h"
 #include "main.h"
-#include <math.h>
 #include "jsmn.h"
 
-GameState currentGameState = STATE_START;
-Color chainColors[] = {
+GameState currentGameState = STATE_START;   //Stores the current state of the game.
+Color chainColors[] = { //An array of colors used to represent each chain.
     RAYWHITE, RED, GREEN, BLUE, YELLOW,ORANGE, GRAY
 };
-Cell* board = NULL;
-int boardSize = 0;
-Cell** lastsOfChains;
-int nbOfChains = 0;
-int level;
-int lastChain = 0;
+Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
+int boardSize = 0;  //The number of cells in the game board.
+Cell** lastsOfChains;  //An array of pointers to the last cell in each chain.
+int nbOfChains = 0;  //The number of chains in the game.
+int level; //The current level.
+int lastChain = 0; //The ID of the last chain.
 
-Color* GetChainColor(int chain) {
+Color* GetChainColor(int chain) { //Returns a pointer to the color of the specified chain.
     return &chainColors[chain];
 }
 
-Cell* GetBoard() {
+Cell* GetBoard() { //Returns a pointer to the game board array.
     return board;
 }
 
-int GetBoardSize() {
+int GetBoardSize() { //Returns the number of cells in the game board.
     return boardSize;
 }
 
-void ChangeGameState(int state) {
+void ChangeGameState(int state) { //Changes the current game state to the specified state.
     currentGameState = state;
 }
 
-GameState GetCurrentGameState() {
+GameState GetCurrentGameState() { //Returns the current game state.
     return currentGameState;
 }
 
-int GetLevel() {
+int GetLevel() { //Returns the current level being.
     return level;
 }
 
-Cell** GetLastsOfChains() {
+Cell** GetLastsOfChains() { //Returns a pointer to the array of pointers to the last cell in each chain.
     return lastsOfChains;
 }
 
-bool InitLevel(int name) {
+bool InitLevel(int name) { //Initializes the game board by a specified level.
     char nb[2];
     itoa(name,nb,10);
     FILE* ptr;
@@ -129,15 +129,15 @@ bool InitLevel(int name) {
     return true;
 }
 
-int GetLastChainInt() {
+int GetLastChainInt() { //Returns the ID of the last chain created.
     return lastChain;
 }
 
-void NextLastChainInt() {
+void NextLastChainInt() { //Increments the ID of the last chain created.
     lastChain++;
 }
 
-int main() {
+int main() { //The main function of the program that initializes the game window, loads the game icon, initializes the first level, updates the game state, and draws the game frame.
     InitWindow(SCRREN_WIDTH, SCREEN_HEIGHT, "Cardinal Chains");
     Image icon = LoadImage("./assets/icon.png");
     SetWindowIcon(icon);

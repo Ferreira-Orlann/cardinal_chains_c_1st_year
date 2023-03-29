@@ -1,10 +1,11 @@
 #include "raylib.h"
 #include "gameconsts.h"
 #include "main.h"
+#include "draw.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "utils.h"
-
+#include <unistd.h>
 Cell* lastCollisionedCell = NULL;
 
 void UpdateGame(GameState state) {
@@ -105,8 +106,13 @@ void UpdateGame(GameState state) {
                 Cell* cell = board+i;
                 if (cell->chain == 0 && cell->value != -1) {
                     break;
-                } 
+                }
                 if (i == (size-1)) {
+                    DrawCenteredText("LEVEL FINISH ",SCRREN_WIDTH/2, SCREEN_HEIGHT/6, 60, BLACK);
+                    DrawFrame(GetCurrentGameState());
+                    sleep(1.2);
+                    ClearBackground(RAYWHITE);
+
                     if (InitLevel(GetLevel()+1) == false) {
                         ChangeGameState(STATE_WIN);
                     }
