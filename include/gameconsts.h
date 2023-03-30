@@ -11,8 +11,9 @@
         STATE_LEVEL_FINISH
     } GameState;
 
+    // Size: 21 Bytes / 168 Bits
     typedef struct {
-        Rectangle rect;
+        Rectangle rect; // 16 bytes (4 floats -> 4 * 4 Bytes) / 128 Bits
         unsigned char value;
         unsigned char x;
         unsigned char y;
@@ -28,10 +29,6 @@
         CELLTYPE_BOTTOM = (1 << 5),
     } CellType;
 
-    #ifndef SCRREN_WIDTH
-        #define SCRREN_WIDTH 1080
-    #endif
-    #ifndef SCREEN_HEIGHT
-        #define SCREEN_HEIGHT 720
-    #endif
+    #define SCRREN_WIDTH 1080
+    #define SCREEN_HEIGHT 720
 #endif

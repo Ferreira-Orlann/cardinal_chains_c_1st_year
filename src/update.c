@@ -11,23 +11,27 @@ Cell* lastCollisionedCell = NULL;
 
 void BoardUpdate();
 void SleepUpdate();
+void TestBoardUpdate();
+Cell* GetCellByCollision(Vector2);
 
 float sleepTime = 0;
 
 void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
     switch (state) {
         case STATE_START:
-            char* text = "Start";
-            Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60);
-            Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 60, 1);
-            Rectangle textRect = {
-                .width = textSize.x,
-                .height = textSize.y,
-                .x = textStartPos.x,
-                .y = textStartPos.y
-            };
-            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), textRect) == true) {
-                ChangeGameState(STATE_BOARD);
+            if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                char* text = "Start";
+                Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60);
+                Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 60, 1);
+                Rectangle textRect = {
+                    .width = textSize.x,
+                    .height = textSize.y,
+                    .x = textStartPos.x,
+                    .y = textStartPos.y
+                };
+                if (CheckCollisionPointRec(GetMousePosition(), textRect) == true) {
+                    ChangeGameState(STATE_BOARD);
+                }
             }
             break;
         case STATE_BOARD:
@@ -52,39 +56,24 @@ void SleepUpdate() { //Updates the sleep time counter until the next level is in
     }
 }
 
-void BoardUpdate() { //Updates the board state
-            Cell* collosionedCell = NULL;
-            Cell* board = GetBoard();
-            int size = GetBoardSize();
-            {
-                for (int i = 0; i < size; i++) {
-                    Cell* cell = board+i;
-                    if (CheckCollisionPointRec(GetMousePosition(), cell->rect) == true) {
-                        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) == true) {
-                            collosionedCell = cell;
-                        }
-                        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT) == true) {
-                            int chain = cell->chain;
-                            if (chain == 0 || cell->value != 0) {
-                                continue;
-                            }
-                            for (int i = 0; i < size; i++) {
-                                Cell* cell2 = board+i;
-                                if (cell2->chain == chain) {
-                                    if(cell2->value != 0) {
-                                        cell2->chain = 0;
-                                    } else {
-                                        *(GetLastsOfChains()+(cell->chain-1)) = cell;
-                                    }
-                                    cell2->type = CELLTYPE_NONE;
-                                }
-                            }
-                            lastCollisionedCell = NULL;
-                        }
-                    }
-                }
-            }
-            if (collosionedCell == NULL || collosionedCell->value < 0) { 
+void BoardUpdate() {
+    int input = KEY_NULL;
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        input = MOUSE_BUTTON_LEFT;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+        input = MOUSE_BUTTON_RIGHT;
+    } else {
+        return;
+    }
+    Cell* collosionedCell = GetCellByCollision(GetMousePosition());
+    if (collosionedCell == NULL) {
+        return;
+    }
+    int size = GetBoardSize();
+    Cell* board = GetBoard();
+    switch (input) {
+        case MOUSE_BUTTON_LEFT:
+        if (collosionedCell == NULL || collosionedCell->value < 0) { 
                 return;
             }
             if (lastCollisionedCell == NULL) {
@@ -140,4 +129,38 @@ void BoardUpdate() { //Updates the board state
                     sleepTime = 1.2f;
                 }
             }
+            break;
+        case MOUSE_BUTTON_RIGHT:
+            int chain = collosionedCell->chain;
+            if (chain == 0 || collosionedCell->value != 0) {
+                return;
+            }
+            for (int i = 0; i < size; i++) {
+                Cell* cell2 = board+i;
+                if (cell2->chain == chain) {
+                    if(cell2->value != 0) {
+                        cell2->chain = 0;
+                    } else {
+                        *(GetLastsOfChains()+(collosionedCell->chain-1)) = collosionedCell;
+                    }
+                    cell2->type = CELLTYPE_NONE;
+                }
+            }
+            lastCollisionedCell = NULL;
+            break;
+        default:
+            break;
+    }  
+}
+
+Cell* GetCellByCollision(Vector2 pos) {
+    int size = GetBoardSize();
+    Cell* board = GetBoard();
+    for (int i = 0; i < size; i++) {
+        Cell* cell = board+i;
+        if (CheckCollisionPointRec(pos, cell->rect) == true) {
+            return cell;
+        }
+    }
+    return NULL;
 }

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "raigui.h": "c",
+        "raygui.h": "c"
+    }
+}

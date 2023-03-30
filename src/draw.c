@@ -3,6 +3,8 @@
 #include "gameconsts.h"
 #include "main.h"
 #include "utils.h"
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 
 void DrawLevel(); //Draws the current level of the game.
 void DrawBoard(); // Draws the board with all the cells;

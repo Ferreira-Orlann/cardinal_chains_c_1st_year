@@ -8,7 +8,7 @@
 #include "update.h"
 #include "main.h"
 #include "jsmn.h"
-#include "raigui.h"
+#include "raygui.h"
 
 GameState currentGameState = STATE_START;   //Stores the current state of the game.
 Color chainColors[] = { //An array of colors used to represent each chain.
@@ -20,6 +20,11 @@ Cell** lastsOfChains;  //An array of pointers to the last cell in each chain.
 int nbOfChains = 0;  //The number of chains in the game.
 int level; //The current level.
 int lastChain = 0; //The ID of the last chain.
+bool settingsMenuOpened = false;
+
+bool IsSettingsMenuOpened() {
+    return settingsMenuOpened;
+}
 
 Color* GetChainColor(int chain) { //Returns a pointer to the color of the specified chain.
     return &chainColors[chain];
@@ -75,6 +80,9 @@ bool InitLevel(int name) { //Initializes the game board by a specified level.
     if (board != NULL) {
         free(board);
     }
+    if (lastsOfChains != NULL) {
+        free(lastsOfChains);
+    }
     boardSize = 0;
     for (int i = 0; i < jsonSize; i++) {
         char charVal[2];
@@ -120,13 +128,13 @@ bool InitLevel(int name) { //Initializes the game board by a specified level.
             offset++;
         }
     }
-    for (int i = 0; i < nbOfChains; i++) {
-        *(lastsOfChains+i) = NULL;
-    }
     level = name;
     lastChain = 0;
     nbOfChains = localNbOfChains;
     lastsOfChains = malloc(sizeof(Cell*)*nbOfChains);
+    for (int i = 0; i < nbOfChains; i++) {
+        *(lastsOfChains+i) = NULL;
+    }
     return true;
 }
 

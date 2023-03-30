@@ -203,6 +203,9 @@
 #ifndef RAYGUI_H
 #define RAYGUI_H
 
+// Rajouté par Orlann pour corriger le fait que dans RayLib la fonction GetCodepointNext() a été remplacé par GetCodepoint()
+#define GetCodepointNext(x,y) GetCodepoint(x,y)
+
 #define RAYGUI_VERSION  "3.2"
 
 #if !defined(RAYGUI_STANDALONE)

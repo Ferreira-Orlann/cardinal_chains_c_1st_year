@@ -10,4 +10,5 @@
     Cell** GetLastsOfChains();
     int GetLastChainInt();
     void NextLastChainInt();
+    bool IsSettingsMenuOpened();
 #endif
