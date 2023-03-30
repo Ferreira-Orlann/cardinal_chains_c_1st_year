@@ -12,18 +12,18 @@
 
 void LoadTextures();
 
-GameState currentGameState = STATE_START;   //Stores the current state of the game.
-Color chainColors[] = { //An array of colors used to represent each chain.
+static GameState currentGameState = STATE_START;   //Stores the current state of the game.
+static Color chainColors[] = { //An array of colors used to represent each chain.
     RAYWHITE, GREEN, BLUE, YELLOW, ORANGE, GRAY, GOLD, LIME
 };
-Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
-int boardSize = 0;  //The number of cells in the game board.
-Cell** lastsOfChains;  //An array of pointers to the last cell in each chain.
-int nbOfChains = 0;  //The number of chains in the game.
-int level; //The current level.
-int lastChain = 0; //The ID of the last chain.
-bool settingsMenuOpened = false;
-Texture2D* texturesList = NULL;
+static Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
+static int boardSize = 0;  //The number of cells in the game board.
+static Cell** lastsOfChains;  //An array of pointers to the last cell in each chain.
+static int nbOfChains = 0;  //The number of chains in the game.
+static int level; //The current level.
+static int lastChain = 0; //The ID of the last chain.
+static bool settingsMenuOpened = false;
+static Texture2D* texturesList = NULL;
 
 Texture2D* GetTextures() {
     return texturesList;

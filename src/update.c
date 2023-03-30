@@ -86,6 +86,10 @@ void SleepUpdate() { //Updates the sleep time counter until it reach 0
     }
 }
 
+void UpdateSettingsMenu(bool closeButtonClick) {
+    SetSettingsMenuOpened(!closeButtonClick);
+}
+
 void BoardUpdate() {
     int input = KEY_NULL;
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {

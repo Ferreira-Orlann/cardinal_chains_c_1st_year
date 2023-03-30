@@ -5,16 +5,18 @@
 #include "utils.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
+#include "update.h"
 
 void DrawLevel(); //Draws the current level of the game.
 void DrawBoard(); // Draws the board with all the cells;
 void DrawCell(Cell*); //Draws each individual cell of the board;
 void DrawCenteredText(const char*, int, int, int, Color); //Draws a centered text;
 void DrawUtilitaries();
+void DrawSettingsMenu();
 
 void DrawFrame(GameState state) { //Draws the main frame for the game;
 	BeginDrawing();
-		ClearBackground(RAYWHITE);
+		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
         Texture2D* textures = GetTextures();
         DrawTexture(*textures, 990, 25, WHITE);
 		switch (state) {
@@ -46,21 +48,25 @@ void DrawFrame(GameState state) { //Draws the main frame for the game;
 				break;
 		}
         DrawFPS(10,10);
+        if (IsSettingsMenuOpened()) {
+            DrawSettingsMenu();
+        }
 
 	EndDrawing();
 }
 
-void DrawUtilitaries() {
-    GuiButton((Rectangle) {.x = 880,.y = 640,.width = 120,.height = 24}, "Save Level");
+void DrawSettingsMenu() {
+    if (!IsSettingsMenuOpened()) {
+        return;
+    }
+    bool closeButtonClick = GuiWindowBox((Rectangle){ 740, 30, 250, 300 }, "Settings");
+    if (closeButtonClick) {
+        UpdateSettingsMenu(closeButtonClick);
+    }
 }
 
-void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color) {
-    Vector2 pos = {
-        .x = x,
-        .y = y
-    };
-    pos = CenterTextVec(text, pos, fontSize);
-    DrawText(text, pos.x, pos.y, fontSize, color);
+void DrawUtilitaries() {
+    GuiButton((Rectangle) {.x = 880,.y = 640,.width = 120,.height = 24}, "Save Level");
 }
 
 void DrawLevel() {
