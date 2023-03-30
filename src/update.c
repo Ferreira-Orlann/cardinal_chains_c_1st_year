@@ -18,10 +18,17 @@ void ButtonsUpdate();
 float sleepTime = 0;
 
 void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
+    Vector2 mousePos = GetMousePosition();
+    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        Rectangle settingsButton = {.x = 990,.y = 25,.width = 64,.height = 64};
+        if (CheckCollisionPointRec(mousePos, settingsButton)) {
+            SetSettingsMenuOpened(!IsSettingsMenuOpened());
+            return;
+        }
+    }
     switch (state) {
         case STATE_START:
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-                Vector2 mousePos = GetMousePosition();
                 char* text = "Start";
                 Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60);
                 Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 60, 1);
