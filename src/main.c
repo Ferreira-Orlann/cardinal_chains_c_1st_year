@@ -12,7 +12,7 @@
 
 GameState currentGameState = STATE_START;   //Stores the current state of the game.
 Color chainColors[] = { //An array of colors used to represent each chain.
-    RAYWHITE, GREEN, BLUE, YELLOW, ORANGE, GRAY, RED
+    RAYWHITE, GREEN, BLUE, YELLOW, ORANGE, GRAY, GOLD, LIME
 };
 Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
 int boardSize = 0;  //The number of cells in the game board.
