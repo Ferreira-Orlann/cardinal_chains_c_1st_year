@@ -59,7 +59,9 @@ void DrawSettingsMenu() {
     if (!IsSettingsMenuOpened()) {
         return;
     }
-    bool closeButtonClick = GuiWindowBox((Rectangle){ 740, 30, 250, 300 }, "Settings");
+    Rectangle windowsRect = { 740, 30, 250, 300 };
+    bool closeButtonClick = GuiWindowBox(windowsRect, "Settings");
+    UpdateStyleComboBox(GuiComboBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 29, (float)windowsRect.width-10, 20}, "Style Defaut;Style Dark;Style Cyber;Style Terminal", GetCurrentStyle()));
     if (closeButtonClick) {
         UpdateSettingsMenu(closeButtonClick);
     }

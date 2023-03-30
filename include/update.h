@@ -2,4 +2,5 @@
     #define H_UPDATE
     void UpdateGame(GameState);
     void UpdateSettingsMenu(bool);
+    void UpdateStyleComboBox(int);
 #endif

@@ -1,12 +1,16 @@
 #include "raylib.h"
 #include "gameconsts.h"
 #include "main.h"
+#include "raygui.h"
 #include "draw.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "utils.h"
 #include <unistd.h>
 #include "save.h"
+#include "styles/style_dark.h"
+#include "styles/style_cyber.h"
+#include "styles/style_terminal.h"
 
 Cell* lastCollisionedCell = NULL;
 
@@ -19,6 +23,9 @@ float sleepTime = 0;
 
 void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
     Vector2 mousePos = GetMousePosition();
+    if (IsSettingsMenuOpened()) {
+        return;
+    }
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
         Rectangle settingsButton = {.x = 990,.y = 25,.width = 64,.height = 64};
         if (CheckCollisionPointRec(mousePos, settingsButton)) {
@@ -88,6 +95,20 @@ void SleepUpdate() { //Updates the sleep time counter until it reach 0
 
 void UpdateSettingsMenu(bool closeButtonClick) {
     SetSettingsMenuOpened(!closeButtonClick);
+}
+
+void UpdateStyleComboBox(int style) {
+    if (style == GetCurrentStyle()) {
+        return;
+    }
+    SetCurrentStyle(style);
+    switch (style) {
+        case 0: GuiLoadStyleDefault(); break;
+        case 1: GuiLoadStyleDark(); break;
+        case 2: GuiLoadStyleCyber(); break;
+        case 3: GuiLoadStyleTerminal(); break;
+        default: break;
+    }
 }
 
 void BoardUpdate() {

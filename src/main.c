@@ -24,6 +24,15 @@ static int level; //The current level.
 static int lastChain = 0; //The ID of the last chain.
 static bool settingsMenuOpened = false;
 static Texture2D* texturesList = NULL;
+static int currentStyle = 0;
+
+int GetCurrentStyle() {
+    return currentStyle;
+}
+
+void SetCurrentStyle(int style) {
+    currentStyle = style;
+}
 
 Texture2D* GetTextures() {
     return texturesList;

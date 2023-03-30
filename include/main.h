@@ -20,4 +20,6 @@
     int GetNbOfChains();
     void SetSettingsMenuOpened(bool);
     Texture2D* GetTextures();
+    int GetCurrentStyle();
+    void SetCurrentStyle();
 #endif
