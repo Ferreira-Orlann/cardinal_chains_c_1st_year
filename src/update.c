@@ -23,9 +23,6 @@ float sleepTime = 0;
 
 void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
     Vector2 mousePos = GetMousePosition();
-    if (IsSettingsMenuOpened()) {
-        return;
-    }
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
         Rectangle settingsButton = {.x = 990,.y = 25,.width = 64,.height = 64};
         if (CheckCollisionPointRec(mousePos, settingsButton)) {

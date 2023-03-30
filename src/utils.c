@@ -16,7 +16,7 @@ Vector2 CenterTextVec(const char* text, Vector2 pos, int fontSize, Font font) {
 
 void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color) {
     int fontSizeTemp = GuiGetStyle(DEFAULT, TEXT_SIZE);
-    GuiSetStyle(DEFAULT, TEXT_SIZE, 20);
+    GuiSetStyle(DEFAULT, TEXT_SIZE, fontSize);
     fontSize = (float)GuiGetStyle(DEFAULT, TEXT_SIZE);
     Vector2 pos = {
         .x = x,
