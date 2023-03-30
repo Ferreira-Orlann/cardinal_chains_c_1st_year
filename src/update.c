@@ -36,7 +36,9 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
                 }
                 Rectangle saveButton = {.x = 880,.y = 640,.width = 120,.height = 24};
                 if (CheckCollisionPointRec(mousePos, saveButton)) {
-                    LoadLevel();
+                    if (LoadLevel() != false) {
+                        ChangeGameState(STATE_BOARD);
+                    }
                 }
                 
             }
@@ -60,7 +62,9 @@ void ButtonsUpdate() {
     Rectangle saveButton = {.x = 880,.y = 640,.width = 120,.height = 24};
     Vector2 mousePos = GetMousePosition();
     if (CheckCollisionPointRec(mousePos, saveButton)) {
-        SaveLevel();
+        if (SaveLevel() != false) {
+            ChangeGameState(STATE_START);
+        }
     }
 }
 
