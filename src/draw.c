@@ -87,7 +87,7 @@ void DrawBoard() {
 void DrawCell(Cell* cell) {
     if (cell->value >= 0) {
         Rectangle rect = cell->rect;
-        Color color = *GetChainColor(cell->chain);
+        Color color = GetChainColor(cell->chain);
         DrawRectangleRec(rect, GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
         int lineThick = 2.0f;
         if ((lineThick > rect.width) || (lineThick > rect.height)) {

@@ -13,8 +13,8 @@
 void LoadTextures();
 
 static GameState currentGameState = STATE_START;   //Stores the current state of the game.
-static Color chainColors[] = { //An array of colors used to represent each chain.
-    RAYWHITE, GREEN, BLUE, YELLOW, ORANGE, GRAY, GOLD, LIME
+static int chainColors[] = { //An array of colors used to represent each chain.
+    BACKGROUND_COLOR, BORDER_COLOR_FOCUSED
 };
 static Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
 static int boardSize = 0;  //The number of cells in the game board.
@@ -57,8 +57,8 @@ int GetNbOfChains() {
     return nbOfChains;
 }
 
-Color* GetChainColor(int chain) { //Returns a pointer to the color of the specified chain.
-    return &chainColors[chain];
+Color GetChainColor(int chain) { //Returns a pointer to the color of the specified chain.
+    return GetColor(GuiGetStyle(DEFAULT, chainColors[chain]));
 }
 
 Cell* GetBoard() { //Returns a pointer to the game board array.

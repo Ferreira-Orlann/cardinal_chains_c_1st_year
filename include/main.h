@@ -10,7 +10,7 @@
     int GetLevel();
     void ChangeGameState(int);
     GameState GetCurrentGameState();
-    Color* GetChainColor(int);
+    Color GetChainColor(int);
     Cell* GetBoard();
     int GetBoardSize();
     Cell** GetLastsOfChains();
