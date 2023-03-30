@@ -10,6 +10,8 @@
 #include "jsmn.h"
 #include "raygui.h"
 
+void LoadTextures();
+
 GameState currentGameState = STATE_START;   //Stores the current state of the game.
 Color chainColors[] = { //An array of colors used to represent each chain.
     RAYWHITE, GREEN, BLUE, YELLOW, ORANGE, GRAY, GOLD, LIME
@@ -21,13 +23,29 @@ int nbOfChains = 0;  //The number of chains in the game.
 int level; //The current level.
 int lastChain = 0; //The ID of the last chain.
 bool settingsMenuOpened = false;
+Texture2D* texturesList = NULL;
 
-int GetNbOfChains() {
-    return nbOfChains;
+Texture2D* GetTextures() {
+    return texturesList;
+}
+
+void LoadTextures() {
+    texturesList = malloc(sizeof(Texture2D)*1);
+    Image settingsIconImg = LoadImage("assets/settings.png");
+    *texturesList = LoadTextureFromImage(settingsIconImg);
+    UnloadImage(settingsIconImg);
 }
 
 bool IsSettingsMenuOpened() {
     return settingsMenuOpened;
+}
+
+void SetSettingsMenuOpened(bool val) {
+    settingsMenuOpened = val;
+}
+
+int GetNbOfChains() {
+    return nbOfChains;
 }
 
 Color* GetChainColor(int chain) { //Returns a pointer to the color of the specified chain.
@@ -155,8 +173,10 @@ int main() { //The main function of the program that initializes the game window
     Image icon = LoadImage("./assets/icon.png");
     SetWindowIcon(icon);
     UnloadImage(icon);
+
     SetTargetFPS(60);
 
+    LoadTextures();
     InitLevel(1);
 
     while (!WindowShouldClose()) {

@@ -15,6 +15,8 @@ void DrawUtilitaries();
 void DrawFrame(GameState state) { //Draws the main frame for the game;
 	BeginDrawing();
 		ClearBackground(RAYWHITE);
+        Texture2D* textures = GetTextures();
+        DrawTexture(*textures, 990, 25, WHITE);
 		switch (state) {
 			case STATE_START:
                 DrawCenteredText("WELCOME TO ",SCRREN_WIDTH/2, SCREEN_HEIGHT/6, 60, ORANGE);
@@ -44,6 +46,7 @@ void DrawFrame(GameState state) { //Draws the main frame for the game;
 				break;
 		}
         DrawFPS(10,10);
+
 	EndDrawing();
 }
 

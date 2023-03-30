@@ -18,4 +18,6 @@
     void NextLastChainInt();
     bool IsSettingsMenuOpened();
     int GetNbOfChains();
+    void SetSettingsMenuOpened(bool);
+    Texture2D* GetTextures();
 #endif
