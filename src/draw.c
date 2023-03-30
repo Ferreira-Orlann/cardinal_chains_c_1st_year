@@ -10,6 +10,7 @@ void DrawLevel(); //Draws the current level of the game.
 void DrawBoard(); // Draws the board with all the cells;
 void DrawCell(Cell*); //Draws each individual cell of the board;
 void DrawCenteredText(const char*, int, int, int, Color); //Draws a centered text;
+void DrawUtilitaries();
 
 void DrawFrame(GameState state) { //Draws the main frame for the game;
 	BeginDrawing();
@@ -20,10 +21,12 @@ void DrawFrame(GameState state) { //Draws the main frame for the game;
                 DrawCenteredText("CARDINAL CHAINS GAME",SCRREN_WIDTH/2.1, SCREEN_HEIGHT/3.8, 60, ORANGE);
                 DrawCenteredText("Start",SCRREN_WIDTH/2, SCREEN_HEIGHT/2, 60, RED);
                 DrawCenteredText("Game created by Orlann Ferreira and Tommy Brisset",SCRREN_WIDTH/3.8, SCREEN_HEIGHT/1.08, 20, BLACK);
+                GuiButton((Rectangle) {.x = 880,.y = 640,.width = 120,.height = 24}, "Open Level");
                 break;
 			case STATE_BOARD:
                 DrawLevel();
 				DrawBoard();
+                DrawUtilitaries();
 				break;
 			case STATE_WIN:
                 DrawLevel();
@@ -35,11 +38,17 @@ void DrawFrame(GameState state) { //Draws the main frame for the game;
                 DrawLevel();
 				DrawBoard();
                 DrawCenteredText("LEVEL FINISH ",SCRREN_WIDTH/2, SCREEN_HEIGHT/6, 60, BLACK);
+                DrawUtilitaries();
+                break;
 			default:
 				break;
 		}
         DrawFPS(10,10);
 	EndDrawing();
+}
+
+void DrawUtilitaries() {
+    GuiButton((Rectangle) {.x = 880,.y = 640,.width = 120,.height = 24}, "Save Level");
 }
 
 void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color) {

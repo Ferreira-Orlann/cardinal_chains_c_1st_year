@@ -22,6 +22,10 @@ int level; //The current level.
 int lastChain = 0; //The ID of the last chain.
 bool settingsMenuOpened = false;
 
+int GetNbOfChains() {
+    return nbOfChains;
+}
+
 bool IsSettingsMenuOpened() {
     return settingsMenuOpened;
 }

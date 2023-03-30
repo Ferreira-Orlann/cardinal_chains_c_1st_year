@@ -6,13 +6,14 @@
 #include <stdlib.h>
 #include "utils.h"
 #include <unistd.h>
+#include "save.h"
 
 Cell* lastCollisionedCell = NULL;
 
 void BoardUpdate();
 void SleepUpdate();
-void TestBoardUpdate();
 Cell* GetCellByCollision(Vector2);
+void ButtonsUpdate();
 
 float sleepTime = 0;
 
@@ -20,6 +21,7 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
     switch (state) {
         case STATE_START:
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+                Vector2 mousePos = GetMousePosition();
                 char* text = "Start";
                 Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60);
                 Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 60, 1);
@@ -29,13 +31,19 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
                     .x = textStartPos.x,
                     .y = textStartPos.y
                 };
-                if (CheckCollisionPointRec(GetMousePosition(), textRect) == true) {
+                if (CheckCollisionPointRec(mousePos, textRect) == true) {
                     ChangeGameState(STATE_BOARD);
                 }
+                Rectangle saveButton = {.x = 880,.y = 640,.width = 120,.height = 24};
+                if (CheckCollisionPointRec(mousePos, saveButton)) {
+                    LoadLevel();
+                }
+                
             }
             break;
         case STATE_BOARD:
             BoardUpdate();
+            ButtonsUpdate();
             break;
         case STATE_LEVEL_FINISH:
             SleepUpdate();
@@ -45,8 +53,19 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
     }
 }
 
-void SleepUpdate() { //Updates the sleep time counter until the next level is initialized.
-    sleepTime = sleepTime - GetFrameTime();
+void ButtonsUpdate() {
+    if (!(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))) {
+        return;
+    }
+    Rectangle saveButton = {.x = 880,.y = 640,.width = 120,.height = 24};
+    Vector2 mousePos = GetMousePosition();
+    if (CheckCollisionPointRec(mousePos, saveButton)) {
+        SaveLevel();
+    }
+}
+
+void SleepUpdate() { //Updates the sleep time counter until it reach 0
+    sleepTime-=GetFrameTime();
     if (sleepTime <= 0.0f) {
         if (InitLevel(GetLevel()+1) == false) {
             ChangeGameState(STATE_WIN);

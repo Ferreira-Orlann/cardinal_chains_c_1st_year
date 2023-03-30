@@ -1,4 +1,10 @@
 #ifndef H_MAIN
+    #ifndef H_GAMECONSTS
+        #include "gameconsts.h"
+    #endif
+    #ifndef _STDBOOL_H
+        #include <stdbool.h>
+    #endif
     #define H_MAIN
     bool InitLevel(int);
     int GetLevel();
@@ -11,4 +17,5 @@
     int GetLastChainInt();
     void NextLastChainInt();
     bool IsSettingsMenuOpened();
+    int GetNbOfChains();
 #endif
