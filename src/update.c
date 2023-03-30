@@ -37,8 +37,8 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
         case STATE_START:
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
                 char* text = "Start";
-                Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60);
-                Vector2 textSize = MeasureTextEx(GetFontDefault(), text, 60, 1);
+                Vector2 textStartPos = CenterText(text, SCRREN_WIDTH/2, SCREEN_HEIGHT/2,60, GuiGetFont());
+                Vector2 textSize = MeasureTextEx(GuiGetFont(), text, 60, 1);
                 Rectangle textRect = {
                     .width = textSize.x,
                     .height = textSize.y,

@@ -1,16 +1,15 @@
 #include "raylib.h"
 #include <stdio.h>
 #include "gameconsts.h"
-#include "main.h"
-#include "utils.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
+#include "utils.h"
+#include "main.h"
 #include "update.h"
 
 void DrawLevel(); //Draws the current level of the game.
 void DrawBoard(); // Draws the board with all the cells;
 void DrawCell(Cell*); //Draws each individual cell of the board;
-void DrawCenteredText(const char*, int, int, int, Color); //Draws a centered text;
 void DrawUtilitaries();
 void DrawSettingsMenu();
 
