@@ -29,7 +29,7 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
             return;
         }
     }
-    if (IsKeyPressed(KEY_ESCAPE)) {
+    if (IsKeyReleased(KEY_ESCAPE) || IsKeyReleased(KEY_TAB)) {
         SetSettingsMenuOpened(!IsSettingsMenuOpened());
     }
     switch (state) {
