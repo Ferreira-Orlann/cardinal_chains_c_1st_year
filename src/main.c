@@ -25,6 +25,15 @@ static int lastChain = 0; //The ID of the last chain.
 static bool settingsMenuOpened = false;
 static Texture2D* texturesList = NULL;
 static int currentStyle = 0;
+static bool showFps = false;
+
+void ShowFps() {
+    showFps = !showFps;
+}
+
+bool ShouldShowFps() {
+    return showFps;
+}
 
 int GetCurrentStyle() {
     return currentStyle;

@@ -21,5 +21,7 @@
     void SetSettingsMenuOpened(bool);
     Texture2D* GetTextures();
     int GetCurrentStyle();
-    void SetCurrentStyle();
+    void SetCurrentStyle(int);
+    void ShowFps();
+    bool ShouldShowFps();
 #endif

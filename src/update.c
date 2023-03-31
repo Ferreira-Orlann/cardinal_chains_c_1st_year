@@ -79,6 +79,12 @@ void ButtonsUpdate() {
     }
 }
 
+void UpdateShowFps(int showFps) {
+    if (showFps != ShouldShowFps()) {
+        ShowFps();
+    }
+}
+
 void SleepUpdate() { //Updates the sleep time counter until it reach 0
     sleepTime-=GetFrameTime();
     if (sleepTime <= 0.0f) {

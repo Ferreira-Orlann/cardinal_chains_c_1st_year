@@ -46,7 +46,9 @@ void DrawFrame(GameState state) { //Draws the main frame for the game;
 			default:
 				break;
 		}
-        DrawFPS(10,10);
+        if (ShouldShowFps()) {
+            DrawFPS(10,10);
+        }
         if (IsSettingsMenuOpened()) {
             DrawSettingsMenu();
         }
@@ -61,6 +63,7 @@ void DrawSettingsMenu() {
     Rectangle windowsRect = { 740, 30, 250, 300 };
     bool closeButtonClick = GuiWindowBox(windowsRect, "Settings");
     UpdateStyleComboBox(GuiComboBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 29, (float)windowsRect.width-10, 20}, "Style Defaut;Style Dark;Style Cyber;Style Terminal", GetCurrentStyle()));
+    UpdateShowFps(GuiCheckBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 54, (float)20, 20}, "Affichier les PFS", ShouldShowFps()));
     if (closeButtonClick) {
         UpdateSettingsMenu(closeButtonClick);
     }
