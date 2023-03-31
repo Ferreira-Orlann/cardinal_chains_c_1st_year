@@ -18,8 +18,8 @@ Cell* GetCellByLocation(unsigned char x, unsigned char y);
 static char const * patern[1] = { "*.save"};
 
 bool SaveLevel() {
-    tinyfd_saveFileDialog("Sauvegarde", "", 1, patern, NULL);
-    FILE *file = fopen("data.save","wb");
+    char* path = tinyfd_saveFileDialog("Sauvegarde", "", 1, patern, NULL);
+    FILE *file = fopen(path,"wb");
     if (file == NULL) {
         return false;
     }

@@ -195,7 +195,7 @@ int main() { //The main function of the program that initializes the game window
     SetTargetFPS(60);
 
     LoadTextures();
-    InitLevel(32);
+    InitLevel(1);
 
     while (!WindowShouldClose()) {
         UpdateGame(currentGameState);

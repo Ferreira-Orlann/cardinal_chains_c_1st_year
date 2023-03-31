@@ -17,7 +17,6 @@ Cell* lastCollisionedCell = NULL;
 void BoardUpdate();
 void SleepUpdate();
 Cell* GetCellByCollision(Vector2);
-void ButtonsUpdate();
 
 float sleepTime = 0;
 
