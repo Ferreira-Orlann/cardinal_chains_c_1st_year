@@ -95,29 +95,27 @@ void DrawCell(Cell* cell) {
             else if (rect.width < rect.height) lineThick = rect.width/2;
         }
         if (!(cell->type & CELLTYPE_TOP)) {
-            Rectangle top = { rect.x, rect.y, rect.width, 2.0f };
+            Rectangle top = { rect.x - lineThick, rect.y - lineThick, rect.width + lineThick*2.0f, lineThick*2.0f };
             DrawRectangleRec(top, BLACK);
         }
         if (!(cell->type & CELLTYPE_BOTTOM)) {
-            // Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width, lineThick };
-            Rectangle bottom = { rect.x, rect.y - lineThick + rect.height, rect.width + 1, lineThick };
+            Rectangle bottom = { rect.x - lineThick, rect.y + rect.height - lineThick, rect.width + lineThick*2.0f, lineThick*2.0f };
             DrawRectangleRec(bottom, BLACK);
         }
         if (!(cell->type & CELLTYPE_RIGHT)) {
-            // Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
-            Rectangle right = { rect.x - lineThick + rect.width, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
+            Rectangle right = { rect.x + rect.width - lineThick, rect.y - lineThick, lineThick*2.0f, rect.height + lineThick*2.0f };
             DrawRectangleRec(right, BLACK);
         }
         if (!(cell->type & CELLTYPE_LEFT)) {
-            Rectangle left = { rect.x, rect.y + lineThick, lineThick, rect.height - lineThick*2.0f};
+            Rectangle left = { rect.x - lineThick, rect.y - lineThick, lineThick*2.0f, rect.height + lineThick*2.0f };
             DrawRectangleRec(left, BLACK);
         }
         if (cell->value == 0) {
-            const char* text = "X";   
+            const char* text = "X";
             DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 20, BLACK);
         } else {
             const char* text = TextFormat("%d", cell->value);
             DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 20, BLACK);
-        }    
+        }
     }
 }
