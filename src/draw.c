@@ -92,7 +92,7 @@ void DrawCell(Cell* cell) {
         Rectangle rect = cell->rect;
         Color color = GetChainColor(cell->chain);
         DrawRectangleRec(rect, GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-        int lineThick = 2.0f;
+        int lineThick = 1.5f;
         if ((lineThick > rect.width) || (lineThick > rect.height)) {
             if (rect.width > rect.height) lineThick = rect.height/2;
             else if (rect.width < rect.height) lineThick = rect.width/2;
