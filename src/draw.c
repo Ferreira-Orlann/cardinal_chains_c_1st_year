@@ -56,19 +56,24 @@ void DrawSettingsMenu() {
     if (!IsSettingsMenuOpened()) {
         return;
     }
+    int offset = 29;
     Rectangle windowsRect = { 790, 30, 200, 300 };
     bool closeButtonClick = GuiWindowBox(windowsRect, "Settings");
     GameState gameState= GetCurrentGameState();
-    UpdateStyleComboBox(GuiComboBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 29, (float)windowsRect.width-10, 20}, "Style Defaut;Style Dark;Style Cyber;Style Terminal", GetCurrentStyle()));
-    UpdateShowFps(GuiCheckBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 54, (float)20, 20}, "Affichier les PFS", ShouldShowFps()));
-    if (gameState == STATE_START) {
-        UpdateLoadButton(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + 79, (float)windowsRect.width-10, 20}, "Charger une sauvegarde"));
-    } else {
-        UpdateSaveButton(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + 79, (float)windowsRect.width-10, 20}, "Sauvegarder"));
-    }
+    UpdateStyleComboBox(GuiComboBox((Rectangle){ windowsRect.x + 5, windowsRect.y + offset, (float)windowsRect.width-10, 20}, "Style Defaut;Style Dark;Style Cyber;Style Terminal", GetCurrentStyle()));
+    offset+=25;
+    UpdateShowFps(GuiCheckBox((Rectangle){ windowsRect.x + 5, windowsRect.y + offset, (float)20, 20}, "Affichier les PFS", ShouldShowFps()));
+    offset+=25;
     if (gameState == STATE_BOARD) {
-        UpdateReiniLevel(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + 104, (float)windowsRect.width-10, 20}, "Reinitialiser le niveau"));
+        UpdateReiniLevel(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + offset, (float)windowsRect.width-10, 20}, "Reinitialiser le niveau"));
+        offset+=25;
     }
+    if (gameState == STATE_START) {
+        UpdateLoadButton(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + offset, (float)windowsRect.width-10, 20}, "Charger une sauvegarde"));
+    } else {
+        UpdateSaveButton(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + offset, (float)windowsRect.width-10, 20}, "Sauvegarder"));
+    }
+    offset+=25;
     if (closeButtonClick) {
         UpdateSettingsMenu(closeButtonClick);
     }
