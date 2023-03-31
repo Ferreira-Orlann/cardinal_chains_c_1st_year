@@ -197,7 +197,7 @@ int main() { //The main function of the program that initializes the game window
     LoadTextures();
     InitLevel(1);
 
-    while (!WindowShouldClose()) {
+    while (!(WindowShouldClose() && !IsKeyDown(KEY_ESCAPE))) {
         UpdateGame(currentGameState);
         DrawFrame(currentGameState);
     }

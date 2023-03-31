@@ -29,6 +29,9 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
             return;
         }
     }
+    if (IsKeyPressed(KEY_ESCAPE)) {
+        SetSettingsMenuOpened(!IsSettingsMenuOpened());
+    }
     switch (state) {
         case STATE_START:
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
