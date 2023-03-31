@@ -97,6 +97,23 @@ void UpdateSettingsMenu(bool closeButtonClick) {
     SetSettingsMenuOpened(!closeButtonClick);
 }
 
+void UpdateReiniLevel(bool clicked) {
+    if (clicked) {
+        int size = GetBoardSize();
+        Cell* board = GetBoard();
+        for (int i = 0; i < size; i++) {
+            Cell* cell = board+i;
+            cell->chain = 0;
+            cell->type = CELLTYPE_NONE;
+        }
+        int nbOfChains = GetNbOfChains();
+        Cell** lastsOfChains = GetLastsOfChains();
+        for (int i = 0; i < nbOfChains; i++) {
+            *(lastsOfChains+i) = NULL;
+        }
+    }
+}
+
 void UpdateStyleComboBox(int style) {
     if (style == GetCurrentStyle()) {
         return;

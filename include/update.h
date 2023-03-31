@@ -6,4 +6,5 @@
     void UpdateShowFps(int);
     void UpdateLoadButton(bool);
     void UpdateSaveButton(bool);
+    void UpdateReiniLevel(bool);
 #endif
