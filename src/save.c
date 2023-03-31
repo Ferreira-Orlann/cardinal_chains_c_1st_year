@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "save.h"
 #include "main.h"
+#include "tinyfiledialogs.h"
 
 /*
 
@@ -13,7 +14,11 @@ Cells: unsigned char (chain);
 
 Cell* GetCellByLocation(unsigned char x, unsigned char y);
 
+
+static char const * patern[1] = { "*.save"};
+
 bool SaveLevel() {
+    tinyfd_saveFileDialog("Sauvegarde", "", 1, patern, NULL);
     FILE *file = fopen("data.save","wb");
     if (file == NULL) {
         return false;
@@ -45,12 +50,12 @@ bool SaveLevel() {
         fwrite(&type, sizeof(unsigned char), 1, file);
     }
     fclose(file);
-
     return true;
 }
 
 bool LoadLevel() {
-    FILE *file = fopen("data.save","rb");
+    char* path = tinyfd_openFileDialog("Sauvegarde","", 1, patern, NULL, false);
+    FILE *file = fopen(path,"rb");
     if (file == NULL) {
         return false;
     }

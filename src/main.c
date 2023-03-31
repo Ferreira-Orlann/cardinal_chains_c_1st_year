@@ -14,7 +14,7 @@ void LoadTextures();
 
 static GameState currentGameState = STATE_START;   //Stores the current state of the game.
 static int chainColors[] = { //An array of colors used to represent each chain.
-    BACKGROUND_COLOR, BORDER_COLOR_FOCUSED
+    BACKGROUND_COLOR, TEXT_COLOR_PRESSED
 };
 static Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
 static int boardSize = 0;  //The number of cells in the game board.

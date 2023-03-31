@@ -18,11 +18,7 @@ void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color)
     int fontSizeTemp = GuiGetStyle(DEFAULT, TEXT_SIZE);
     GuiSetStyle(DEFAULT, TEXT_SIZE, fontSize);
     fontSize = (float)GuiGetStyle(DEFAULT, TEXT_SIZE);
-    Vector2 pos = {
-        .x = x,
-        .y = y
-    };
-    pos = CenterTextVec(text, pos, fontSize, GuiGetFont());
+    Vector2 pos = CenterText(text, x, y, fontSize, GuiGetFont());
     Vector2 textSize =  MeasureTextEx(GuiGetFont(), text, fontSize, 1);
     GuiLabel((Rectangle){pos.x, pos.y, textSize.x, textSize.y}, text);
     GuiSetStyle(DEFAULT, TEXT_SIZE, fontSizeTemp);

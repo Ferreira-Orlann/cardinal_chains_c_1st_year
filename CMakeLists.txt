@@ -27,7 +27,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 # Our Project
 
 include_directories(include)
-add_executable(${PROJECT_NAME} src/main.c src/draw.c src/update.c src/utils.c src/save.c)
+add_executable(${PROJECT_NAME} src/main.c src/draw.c src/update.c src/utils.c src/save.c lib/tinyfiledialogs.c)
 # add_executable(${PROJECT_NAME} test.c)
 
 #set(raylib_VERBOSE 1)

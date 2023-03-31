@@ -8,6 +8,7 @@
         "utils.h": "c",
         "save.h": "c",
         "draw.h": "c",
-        "*.m": "c"
+        "*.m": "c",
+        "test.h": "c"
     }
 }
