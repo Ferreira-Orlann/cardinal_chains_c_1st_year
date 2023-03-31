@@ -45,18 +45,10 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
                 if (CheckCollisionPointRec(mousePos, textRect) == true) {
                     ChangeGameState(STATE_BOARD);
                 }
-                Rectangle saveButton = {.x = 880,.y = 640,.width = 120,.height = 24};
-                if (CheckCollisionPointRec(mousePos, saveButton)) {
-                    if (LoadLevel() != false) {
-                        ChangeGameState(STATE_BOARD);
-                    }
-                }
-                
             }
             break;
         case STATE_BOARD:
             BoardUpdate();
-            ButtonsUpdate();
             break;
         case STATE_LEVEL_FINISH:
             SleepUpdate();
@@ -66,13 +58,16 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
     }
 }
 
-void ButtonsUpdate() {
-    if (!(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))) {
-        return;
+void UpdateLoadButton(bool clicked) {
+    if (clicked) {
+        if (LoadLevel() != false) {
+            ChangeGameState(STATE_BOARD);
+        }
     }
-    Rectangle saveButton = {.x = 880,.y = 640,.width = 120,.height = 24};
-    Vector2 mousePos = GetMousePosition();
-    if (CheckCollisionPointRec(mousePos, saveButton)) {
+}
+
+void UpdateSaveButton(bool clicked) {
+    if (clicked) {
         if (SaveLevel() != false) {
             ChangeGameState(STATE_START);
         }

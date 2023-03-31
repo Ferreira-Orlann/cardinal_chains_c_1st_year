@@ -60,18 +60,21 @@ void DrawSettingsMenu() {
     if (!IsSettingsMenuOpened()) {
         return;
     }
-    Rectangle windowsRect = { 740, 30, 250, 300 };
+    Rectangle windowsRect = { 790, 30, 200, 300 };
     bool closeButtonClick = GuiWindowBox(windowsRect, "Settings");
     UpdateStyleComboBox(GuiComboBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 29, (float)windowsRect.width-10, 20}, "Style Defaut;Style Dark;Style Cyber;Style Terminal", GetCurrentStyle()));
     UpdateShowFps(GuiCheckBox((Rectangle){ windowsRect.x + 5, windowsRect.y + 54, (float)20, 20}, "Affichier les PFS", ShouldShowFps()));
+    if (GetCurrentGameState() == STATE_START) {
+        UpdateLoadButton(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + 79, (float)windowsRect.width-10, 20}, "Load Level"));
+    } else {
+        UpdateSaveButton(GuiButton((Rectangle){ windowsRect.x + 5, windowsRect.y + 79, (float)windowsRect.width-10, 20}, "Save Level"));
+    }
     if (closeButtonClick) {
         UpdateSettingsMenu(closeButtonClick);
     }
 }
 
-void DrawUtilitaries() {
-    GuiButton((Rectangle) {.x = 880,.y = 640,.width = 120,.height = 24}, "Save Level");
-}
+void DrawUtilitaries() {}
 
 void DrawLevel() {
     char text[12];

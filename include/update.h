@@ -4,4 +4,6 @@
     void UpdateSettingsMenu(bool);
     void UpdateStyleComboBox(int);
     void UpdateShowFps(int);
+    void UpdateLoadButton(bool);
+    void UpdateSaveButton(bool);
 #endif
