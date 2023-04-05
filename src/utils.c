@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include "raygui.h"
 
-Vector2 CenterText(const char* text, int x, int y, int fontSize, Font font) {
+Vector2 CenterText(const char* text, int x, int y, int fontSize, Font font) { //Calculates the starting point for centering text based on the given position, font size, and text content
     Vector2 textSize =  MeasureTextEx(font, text, fontSize, 1);
     Vector2 startPoint = {
         .x = x-(textSize.x/2),
@@ -10,11 +10,11 @@ Vector2 CenterText(const char* text, int x, int y, int fontSize, Font font) {
     return startPoint;
 }
 
-Vector2 CenterTextVec(const char* text, Vector2 pos, int fontSize, Font font) {
+Vector2 CenterTextVec(const char* text, Vector2 pos, int fontSize, Font font) { //Wrapper function for CenterText that takes a Vector2 position argument
     return CenterText(text, pos.x, pos.y, fontSize, font);
 }
 
-void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color) {
+void DrawCenteredText(const char* text, int x, int y, int fontSize, Color color) { //Draws text centered on the given position using the GuiLabel function from the raygui library
     int fontSizeTemp = GuiGetStyle(DEFAULT, TEXT_SIZE);
     GuiSetStyle(DEFAULT, TEXT_SIZE, fontSize);
     fontSize = (float)GuiGetStyle(DEFAULT, TEXT_SIZE);

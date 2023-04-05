@@ -20,7 +20,7 @@ Cell* GetCellByCollision(Vector2);
 
 float sleepTime = 0;
 
-void UpdateGame(GameState state) { //Updates the game state depending on the passed parameter.
+void UpdateGame(GameState state) { //Updates the game state depending on the GameState parameter.
     Vector2 mousePos = GetMousePosition();
     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
         Rectangle settingsButton = {.x = 990,.y = 25,.width = 64,.height = 64};
@@ -65,7 +65,7 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
     }
 }
 
-void UpdateLoadButton(bool clicked) {
+void UpdateLoadButton(bool clicked) { //updates the load button state and loads the level if clicked
     if (clicked) {
         if (LoadLevel() != false) {
             ChangeGameState(STATE_BOARD);
@@ -73,7 +73,7 @@ void UpdateLoadButton(bool clicked) {
     }
 }
 
-void UpdateSaveButton(bool clicked) {
+void UpdateSaveButton(bool clicked) { //updates the save button state and saves the current level if clicked.
     if (clicked) {
         if (SaveLevel() != false) {
             ChangeGameState(STATE_START);
@@ -81,7 +81,7 @@ void UpdateSaveButton(bool clicked) {
     }
 }
 
-void UpdateShowFps(int showFps) {
+void UpdateShowFps(int showFps) { //updates the state of the FPS display
     if (showFps != ShouldShowFps()) {
         ShowFps();
     }
@@ -98,11 +98,11 @@ void SleepUpdate() { //Updates the sleep time counter until it reach 0
     }
 }
 
-void UpdateSettingsMenu(bool closeButtonClick) {
+void UpdateSettingsMenu(bool closeButtonClick) { //updates the settings menu state and closes it if the close button is clicked.
     SetSettingsMenuOpened(!closeButtonClick);
 }
 
-void UpdateReiniLevel(bool clicked) {
+void UpdateReiniLevel(bool clicked) { //resets the current level if the reset button is clicked
     if (clicked) {
         int size = GetBoardSize();
         Cell* board = GetBoard();
@@ -119,7 +119,7 @@ void UpdateReiniLevel(bool clicked) {
     }
 }
 
-void UpdateStyleComboBox(int style) {
+void UpdateStyleComboBox(int style) { //updates the current style based on the user's selection in the style combo box
     if (style == GetCurrentStyle()) {
         return;
     }
@@ -133,7 +133,7 @@ void UpdateStyleComboBox(int style) {
     }
 }
 
-void BoardUpdate() {
+void BoardUpdate() { //updates the game board based on the user input
     int input = KEY_NULL;
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         input = MOUSE_BUTTON_LEFT;
@@ -228,7 +228,7 @@ void BoardUpdate() {
     }  
 }
 
-Cell* GetCellByCollision(Vector2 pos) {
+Cell* GetCellByCollision(Vector2 pos) { //return a pointer to a corresponding Cell
     int size = GetBoardSize();
     Cell* board = GetBoard();
     for (int i = 0; i < size; i++) {

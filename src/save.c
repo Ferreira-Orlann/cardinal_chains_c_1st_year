@@ -17,7 +17,7 @@ Cell* GetCellByLocation(unsigned char x, unsigned char y);
 
 static char const * patern[1] = { "*.save"};
 
-bool SaveLevel() {
+bool SaveLevel() { //Saves the current level progress to a binary file using the TinyFileDialogs library
     char* path = tinyfd_saveFileDialog("Sauvegarde", "", 1, patern, NULL);
     FILE *file = fopen(path,"wb");
     if (file == NULL) {
@@ -53,7 +53,7 @@ bool SaveLevel() {
     return true;
 }
 
-bool LoadLevel() {
+bool LoadLevel() { //Loads a saved level from a binary file using the TinyFileDialogs library
     char* path = tinyfd_openFileDialog("Sauvegarde","", 1, patern, NULL, false);
     FILE *file = fopen(path,"rb");
     if (file == NULL) {
@@ -98,7 +98,7 @@ bool LoadLevel() {
     return true;
 }
 
-Cell* GetCellByLocation(unsigned char x, unsigned char y) {
+Cell* GetCellByLocation(unsigned char x, unsigned char y) { //Returns a pointer to the cell on the game board located at the given (x,y) coordinates
     int size = GetBoardSize();
     Cell* board = GetBoard();
     for (int i = 0; i < size; i++) {
