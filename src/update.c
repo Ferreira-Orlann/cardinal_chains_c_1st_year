@@ -32,6 +32,11 @@ void UpdateGame(GameState state) { //Updates the game state depending on the pas
     if (IsKeyReleased(KEY_ESCAPE) || IsKeyReleased(KEY_TAB)) {
         SetSettingsMenuOpened(!IsSettingsMenuOpened());
     }
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+    } else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+    }
     switch (state) {
         case STATE_START:
             if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
@@ -165,10 +170,8 @@ void BoardUpdate() {
                 collosionedCell->value >= lastCollisionedCell->value &&
                 lastCollisionedCell == *lastOfChain)
             {
-                printf("Conditions: %d - %d\n", abs((*lastOfChain)->x - collosionedCell->x) == 1, abs((*lastOfChain)->y - collosionedCell->y) == 1);
                 int abs1 = abs((*lastOfChain)->x - collosionedCell->x);
                 int abs2 = abs((*lastOfChain)->y - collosionedCell->y);
-                // if (((abs((*lastOfChain)->x - collosionedCell->x) == 1) != (abs((*lastOfChain)->y - collosionedCell->y) == 1))) {
                 if (((abs1 == 1) != (abs2 == 1)) && ((abs1 < 2) && (abs2 < 2))) {
                     collosionedCell->chain = lastCollisionedCell->chain;
                     printf("lastOfChain (x,y): %d - %d; collosionedCell(x,y) %d - %d; Conditions: %d - %d\n", (*lastOfChain)->x, (*lastOfChain)->y, collosionedCell->x, collosionedCell->y, abs((*lastOfChain)->x - collosionedCell->x) == 1, abs((*lastOfChain)->y - collosionedCell->y) == 1);

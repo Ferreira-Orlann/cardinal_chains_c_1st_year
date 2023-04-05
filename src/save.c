@@ -8,7 +8,7 @@
 level id: int
 GetLastChainInt : int
 LastCells: unsigned char (x); unsigned char(y);
-Cells: unsigned char (chain);
+Cells: unsigned char (chain); unsigned char (type)
 
 */
 
