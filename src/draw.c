@@ -7,12 +7,12 @@
 #include "main.h"
 #include "update.h"
 
-void DrawLevel(); //Draws the current level of the game.
-void DrawBoard(); // Draws the board with all the cells;
-void DrawCell(Cell*); //Draws each individual cell of the board;
-void DrawSettingsMenu();
+void DrawLevel(); //Draws the current level of the game
+void DrawBoard(); // Draws the board with all the cells
+void DrawCell(Cell*); //Draws each individual cell of the board
+void DrawSettingsMenu(); //Draw the settings menu
 
-void DrawFrame(GameState state) { //Draws the main frame for the game;
+void DrawFrame(GameState state) { //Draws the main frame for the game and its contents
 	BeginDrawing();
 		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
         Texture2D* textures = GetTextures();
@@ -52,7 +52,7 @@ void DrawFrame(GameState state) { //Draws the main frame for the game;
 	EndDrawing();
 }
 
-void DrawSettingsMenu() {
+void DrawSettingsMenu() { //draws the settings menu, which is a pop-up window that appears when the user clicks the "Settings" button (parameter picture) in the game window
     if (!IsSettingsMenuOpened()) {
         return;
     }
@@ -79,13 +79,13 @@ void DrawSettingsMenu() {
     }
 }
 
-void DrawLevel() {
+void DrawLevel() { //draws the current level of the game
     char text[12];
     sprintf(text, "Niveau %d", GetLevel());
     DrawCenteredText(text, SCRREN_WIDTH/2, 20, 30, BLACK);
 }
 
-void DrawBoard() {
+void DrawBoard() { // draws the game board
 	Cell* board = GetBoard();
 	int size = GetBoardSize();
 	for (int x = 0; x < size; x++) {
@@ -93,7 +93,7 @@ void DrawBoard() {
 	}
 }
 
-void DrawCell(Cell* cell) {
+void DrawCell(Cell* cell) { //draws an individual cell of the game board. It takes a Cell struct as its argument, which contains information about the cell's value, position, and chain
     if (cell->value >= 0) {
         Rectangle rect = cell->rect;
         Color color = GetChainColor(cell->chain);

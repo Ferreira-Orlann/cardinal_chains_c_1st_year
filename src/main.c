@@ -27,42 +27,42 @@ static Texture2D* texturesList = NULL;
 static int currentStyle = 0;
 static bool showFps = false;
 
-void ShowFps() {
+void ShowFps() {  //Toggles the display of frames per second (FPS)
     showFps = !showFps;
 }
 
-bool ShouldShowFps() {
+bool ShouldShowFps() { //Returns whether or not to display the FPS
     return showFps;
 }
 
-int GetCurrentStyle() {
+int GetCurrentStyle() { //Returns the current style of the game
     return currentStyle;
 }
 
-void SetCurrentStyle(int style) {
+void SetCurrentStyle(int style) { //Sets the current style of the game to the given value
     currentStyle = style;
 }
 
-Texture2D* GetTextures() {
+Texture2D* GetTextures() { //Returns the list of textures
     return texturesList;
 }
 
-void LoadTextures() {
+void LoadTextures() { //Loads the game textures
     texturesList = malloc(sizeof(Texture2D)*1);
     Image settingsIconImg = LoadImage("assets/settings.png");
     *texturesList = LoadTextureFromImage(settingsIconImg);
     UnloadImage(settingsIconImg);
 }
 
-bool IsSettingsMenuOpened() {
+bool IsSettingsMenuOpened() { //Returns whether or not the settings menu is open
     return settingsMenuOpened;
 }
 
-void SetSettingsMenuOpened(bool val) {
+void SetSettingsMenuOpened(bool val) { //Sets the state of the settings menu
     settingsMenuOpened = val;
 }
 
-int GetNbOfChains() {
+int GetNbOfChains() { //Returns the number of chains in the game
     return nbOfChains;
 }
 
@@ -191,17 +191,13 @@ int main() { //The main function of the program that initializes the game window
     Image icon = LoadImage("./assets/icon.png");
     SetWindowIcon(icon);
     UnloadImage(icon);
-
     SetTargetFPS(60);
-
     LoadTextures();
     InitLevel(1);
-
     while (!(WindowShouldClose() && !IsKeyDown(KEY_ESCAPE))) {
         UpdateGame(currentGameState);
         DrawFrame(currentGameState);
     }
-
     CloseWindow();
     free(lastsOfChains);
     free(board);
