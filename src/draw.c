@@ -98,6 +98,7 @@ void DrawCell(Cell* cell) { //draws an individual cell of the game board. It tak
         Rectangle rect = cell->rect;
         Color color = GetChainColor(cell->chain);
         DrawRectangleRec(rect, color);
+        // Inspired from raylib DrawRectangleLines
         int lineThick = 1.5f;
         if ((lineThick > rect.width) || (lineThick > rect.height)) {
             if (rect.width > rect.height) lineThick = rect.height/2;
