@@ -15,7 +15,7 @@ void ChangeColorSet(Color*);
 
 static GameState currentGameState = STATE_START;   //Stores the current state of the game.
 static Color colors[4][8] = { //An array of colors used to represent each chain of different gui style.
-    {RAYWHITE, RED, GREEN, BLUE,YELLOW,PURPLE,ORANGE,PINK},{RAYWHITE, GREEN, RED, YELLOW,BLUE,PURPLE,ORANGE,PINK},{RAYWHITE, RED, GREEN, BLUE,YELLOW,PURPLE,ORANGE,PINK},{RAYWHITE, RED, LIME,PURPLE, BLUE,MAGENTA,ORANGE,PINK}
+    {RAYWHITE, RED, GREEN, BLUE,YELLOW,PURPLE,ORANGE,PINK},{RAYWHITE, MAGENTA, RED, YELLOW,BLUE,PURPLE,ORANGE,PINK},{RAYWHITE, RED, GREEN, BLUE,YELLOW,PURPLE,ORANGE,PINK},{RAYWHITE, RED, LIME,PURPLE, BLUE,MAGENTA,ORANGE,PINK}
 };
 static Color chainColors[8] = { //An array of colors used to represent each chain.
     RAYWHITE, RED, GREEN, BLUE, YELLOW,PURPLE,ORANGE,PINK
@@ -215,7 +215,7 @@ int main() { //The main function of the program that initializes the game window
     UnloadImage(icon);
     SetTargetFPS(60);
     LoadTextures();
-    InitLevel(32);
+    InitLevel(1);
     while (!(WindowShouldClose() && !IsKeyDown(KEY_ESCAPE))) {
         UpdateGame(currentGameState);
         DrawFrame(currentGameState);
