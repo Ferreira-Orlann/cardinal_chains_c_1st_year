@@ -22,7 +22,7 @@ static const GuiStyleProp terminalStyleProps[TERMINAL_STYLE_PROPS_COUNT] = {
     { 0, 4, 0x43bf2eff },    // DEFAULT_BASE_COLOR_FOCUSED 
     { 0, 5, 0xdcfadcff },    // DEFAULT_TEXT_COLOR_FOCUSED 
     { 0, 6, 0x1f5b19ff },    // DEFAULT_BORDER_COLOR_PRESSED 
-    { 0, 7, 0x43ff28ff },    // DEFAULT_BASE_COLOR_PRESSED 
+    { 0, 7, 0x43ff28ff },    // DEFAULT_BASE_COLOR_PRESSED
     { 0, 8, 0x1e6f15ff },    // DEFAULT_TEXT_COLOR_PRESSED 
     { 0, 9, 0x223b22ff },    // DEFAULT_BORDER_COLOR_DISABLED 
     { 0, 10, 0x182c18ff },    // DEFAULT_BASE_COLOR_DISABLED 

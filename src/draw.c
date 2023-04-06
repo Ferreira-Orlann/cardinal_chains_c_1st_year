@@ -121,10 +121,10 @@ void DrawCell(Cell* cell) { //draws an individual cell of the game board. It tak
         }
         if (cell->value == 0) {
             const char* text = "X";
-            DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 20, BLACK);
+            DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 21, BLACK);
         } else {
             const char* text = TextFormat("%d", cell->value);
-            DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 20, BLACK);
+            DrawCenteredText(text, rect.x + (rect.width/2), rect.y + (rect.height/2), 21, BLACK);
         }
     }
 }

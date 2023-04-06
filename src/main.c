@@ -14,11 +14,11 @@ void LoadTextures();
 void ChangeColorSet(Color*);
 
 static GameState currentGameState = STATE_START;   //Stores the current state of the game.
-static Color colors[4][8] = { //An array of colors used to represent each chain.
-    {RAYWHITE, RED, GREEN, BLUE},{RAYWHITE, RED, GREEN, BLUE},{RAYWHITE, RED, GREEN, BLUE},{RAYWHITE, RED, GREEN, BLUE}
+static Color colors[4][8] = { //An array of colors used to represent each chain of different gui style.
+    {RAYWHITE, RED, GREEN, BLUE,YELLOW,PURPLE,ORANGE,PINK},{RAYWHITE, GREEN, RED, YELLOW,BLUE,PURPLE,ORANGE,PINK},{RAYWHITE, RED, GREEN, BLUE,YELLOW,PURPLE,ORANGE,PINK},{RAYWHITE, RED, LIME,PURPLE, BLUE,MAGENTA,ORANGE,PINK}
 };
-static Color chainColors[7] = { //An array of colors used to represent each chain.
-    RAYWHITE, RED, GREEN, BLUE
+static Color chainColors[8] = { //An array of colors used to represent each chain.
+    RAYWHITE, RED, GREEN, BLUE, YELLOW,PURPLE,ORANGE,PINK
 };
 static Cell* board = NULL;  //A ,dynamically allocated array of Cell structs representing the game board.
 static int boardSize = 0;  //The number of cells in the game board.
@@ -56,8 +56,12 @@ void SetCurrentStyle(int style) { //Sets the current style of the game to the gi
 }
 
 void ChangeColorSet(Color* colors) {
-    for (int i = 0; i < 8; i++) {
-        chainColors[0] = *(colors+i);
+    for (int i = 0; i < 9; i++) {
+        if (i == 0) {
+            chainColors[i] = GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR));
+            continue;
+        }
+        chainColors[i] = *(colors+i);
     }
 }
 
@@ -211,7 +215,7 @@ int main() { //The main function of the program that initializes the game window
     UnloadImage(icon);
     SetTargetFPS(60);
     LoadTextures();
-    InitLevel(1);
+    InitLevel(32);
     while (!(WindowShouldClose() && !IsKeyDown(KEY_ESCAPE))) {
         UpdateGame(currentGameState);
         DrawFrame(currentGameState);
