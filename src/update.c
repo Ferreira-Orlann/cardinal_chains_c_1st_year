@@ -174,7 +174,6 @@ void BoardUpdate() { //updates the game board based on the user input
                 int abs2 = abs((*lastOfChain)->y - collosionedCell->y);
                 if (((abs1 == 1) != (abs2 == 1)) && ((abs1 < 2) && (abs2 < 2))) {
                     collosionedCell->chain = lastCollisionedCell->chain;
-                    printf("lastOfChain (x,y): %d - %d; collosionedCell(x,y) %d - %d; Conditions: %d - %d\n", (*lastOfChain)->x, (*lastOfChain)->y, collosionedCell->x, collosionedCell->y, abs((*lastOfChain)->x - collosionedCell->x) == 1, abs((*lastOfChain)->y - collosionedCell->y) == 1);
                     *lastOfChain = collosionedCell;
                     if (collosionedCell->y > lastCollisionedCell->y) {
                         collosionedCell->type = collosionedCell->type | CELLTYPE_TOP;

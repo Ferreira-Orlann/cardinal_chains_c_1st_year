@@ -55,7 +55,7 @@ void SetCurrentStyle(int style) { //Sets the current style of the game to the gi
     }
 }
 
-void ChangeColorSet(Color* colors) {
+void ChangeColorSet(Color* colors) { // change the colors depending on the gui style
     for (int i = 0; i < 9; i++) {
         if (i == 0) {
             chainColors[i] = GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR));
@@ -117,8 +117,10 @@ Cell** GetLastsOfChains() { //Returns a pointer to the array of pointers to the 
 }
 
 bool InitLevel(int name) { //Initializes the game board by a specified level.
+    // Convert level name to string
     char nb[2];
     itoa(name,nb,10);
+    // Open level file
     FILE* ptr;
     char path[50] = "levels/";
     strcat(path, nb);
@@ -130,21 +132,25 @@ bool InitLevel(int name) { //Initializes the game board by a specified level.
     }
     fgets(json, 256, ptr);
     fclose(ptr);
+    // Parse JSON data
     jsmn_parser parser;
     jsmn_init(&parser);
     jsmntok_t tokens[256];
     int jsonSize = jsmn_parse(&parser, json, strlen(json), tokens, 256)-1;
+    // Calculate board parameters
     Vector2 center = {
         .x = GetScreenWidth()/2,
         .y = GetScreenHeight()/2
     };
     int collumSize = (int) ceilf(sqrtf((float) jsonSize));
+    // Free previous board and chains, if they exist
     if (board != NULL) {
         free(board);
     }
     if (lastsOfChains != NULL) {
         free(lastsOfChains);
     }
+    // Calculate board size and allocate memory for board
     boardSize = 0;
     for (int i = 0; i < jsonSize; i++) {
         char charVal[2];
@@ -156,6 +162,7 @@ bool InitLevel(int name) { //Initializes the game board by a specified level.
         }
     }
     board = malloc(sizeof(Cell)*boardSize);
+    // Initialize cells in board
     int startX = center.x-((50*collumSize)/2);
     int startY = center.y-((50*collumSize)/2);
     int position = 0;
@@ -190,6 +197,7 @@ bool InitLevel(int name) { //Initializes the game board by a specified level.
             offset++;
         }
     }
+    // Initialize level parameters
     level = name;
     lastChain = 0;
     nbOfChains = localNbOfChains;
