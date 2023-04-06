@@ -97,7 +97,7 @@ void DrawCell(Cell* cell) { //draws an individual cell of the game board. It tak
     if (cell->value >= 0) {
         Rectangle rect = cell->rect;
         Color color = GetChainColor(cell->chain);
-        DrawRectangleRec(rect, GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+        DrawRectangleRec(rect, color);
         int lineThick = 1.5f;
         if ((lineThick > rect.width) || (lineThick > rect.height)) {
             if (rect.width > rect.height) lineThick = rect.height/2;
