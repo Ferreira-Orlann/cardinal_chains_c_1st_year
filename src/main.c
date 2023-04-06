@@ -13,10 +13,13 @@
 void LoadTextures();
 
 static GameState currentGameState = STATE_START;   //Stores the current state of the game.
-static int chainColors[] = { //An array of colors used to represent each chain.
-    BACKGROUND_COLOR, TEXT_COLOR_PRESSED
+static Color colors[4][8] = { //An array of colors used to represent each chain.
+    {RAYWHITE, RED, GREEN, BLUE},{RAYWHITE, RED, GREEN, BLUE},{RAYWHITE, RED, GREEN, BLUE},{RAYWHITE, RED, GREEN, BLUE}
 };
-static Cell* board = NULL;  //A dynamically allocated array of Cell structs representing the game board.
+static Color chainColors[7] = { //An array of colors used to represent each chain.
+    RAYWHITE, RED, GREEN, BLUE
+};
+static Cell* board = NULL;  //A ,dynamically allocated array of Cell structs representing the game board.
 static int boardSize = 0;  //The number of cells in the game board.
 static Cell** lastsOfChains;  //An array of pointers to the last cell in each chain.
 static int nbOfChains = 0;  //The number of chains in the game.
@@ -41,6 +44,20 @@ int GetCurrentStyle() { //Returns the current style of the game
 
 void SetCurrentStyle(int style) { //Sets the current style of the game to the given value
     currentStyle = style;
+    
+    switch (style) {
+        case 0: ChangeColorSet(colors[0]); break;
+        case 1: ChangeColorSet(colors[1]); break;
+        case 2: ChangeColorSet(colors[2]); break;
+        case 3: ChangeColorSet(colors[3]); break;
+        default: break;
+    }
+}
+
+void ChangeColorSet(Color* colors) {
+    for (int i = 0; i < 8; i++) {
+        chainColors[0] = *(colors+i);
+    }
 }
 
 Texture2D* GetTextures() { //Returns the list of textures
