@@ -11,6 +11,7 @@
 #include "raygui.h"
 
 void LoadTextures();
+void ChangeColorSet(Color*);
 
 static GameState currentGameState = STATE_START;   //Stores the current state of the game.
 static Color colors[4][8] = { //An array of colors used to represent each chain.
