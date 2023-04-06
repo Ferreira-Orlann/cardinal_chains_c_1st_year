@@ -84,7 +84,7 @@ int GetNbOfChains() { //Returns the number of chains in the game
 }
 
 Color GetChainColor(int chain) { //Returns a pointer to the color of the specified chain.
-    return GetColor(GuiGetStyle(DEFAULT, chainColors[chain]));
+    return chainColors[chain];
 }
 
 Cell* GetBoard() { //Returns a pointer to the game board array.
